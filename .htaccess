@@ -1,0 +1,9 @@
+Options -MultiViews
+
+RewriteEngine On
+
+RewriteRule ^venues/?$ venues.php [QSA,L]
+RewriteRule ^venues/([0-9]+)/?$ venues.php?id=$1 [QSA,L]
+
+RewriteRule ^events/?$ events.php [QSA,L]
+RewriteRule ^events/([0-9]+)/?$ events.php?id=$1 [QSA,L]
