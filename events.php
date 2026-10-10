@@ -51,14 +51,159 @@ if ($method === 'GET') {
         respond(200, ['data' => $row]);
     }
 
-    // GET ALL EVENTS
-    $r = $conn->query("SELECT $fields
-         FROM events
-         ORDER BY event_id");
+    
+    // ==========================================
+    // MEMBER 5 - API MANAGEMENT
+    // FEATURE 1: PAGINATION
+    // ==========================================
+
+    // Get page and limit from URL parameters
+    $page = filter_var(
+        $_GET['page'] ?? 1,
+        FILTER_VALIDATE_INT,
+        ['options' => ['min_range' => 1]]
+    );
+
+    $limit = filter_var(
+        $_GET['limit'] ?? 10,
+        FILTER_VALIDATE_INT,
+        ['options' => ['min_range' => 1, 'max_range' => 100]]
+    );
+
+    // Validate pagination parameters
+    if ($page === false || $limit === false) {
+        respond(400, [
+            'error' => 'Page must be positive and limit must be between 1 and 100'
+        ]);
+    }
+
+    // Calculate offset
+    $offset = ($page - 1) * $limit;
+
+// ==========================================
+// MEMBER 5 - API MANAGEMENT
+// FEATURE 2: SEARCHING
+// ==========================================
+
+// Get search keyword from URL
+$search = trim($_GET['search'] ?? '');
+
+// Prepare search pattern for SQL LIKE
+$searchPattern = '%' . $search . '%';
+
+// ==========================================
+// MEMBER 5 - API MANAGEMENT
+// FEATURE 3: FILTERING
+// ==========================================
+
+// Get event status from URL
+$statusFilter = strtoupper(trim($_GET['status'] ?? ''));
+
+// Validate event status
+if (
+    $statusFilter !== '' &&
+    !in_array(
+        $statusFilter,
+        ['ACTIVE', 'CANCELLED', 'COMPLETED'],
+        true
+    )
+) {
+    respond(400, [
+        'error' => 'Invalid status. Use ACTIVE, CANCELLED, or COMPLETED'
+    ]);
+}
+
+// ==========================================
+// MEMBER 5 - API MANAGEMENT
+// FEATURE 4: SORTING
+// ==========================================
+
+// Get sorting column and direction from URL
+$sort = $_GET['sort'] ?? 'event_id';
+$order = strtolower($_GET['order'] ?? 'asc');
+
+// Allow only specific database columns
+$allowedSort = [
+    'event_id',
+    'event_name',
+    'event_date',
+    'ticket_price'
+];
+
+// Validate sorting column
+if (!in_array($sort, $allowedSort, true)) {
+    respond(400, [
+        'error' => 'Invalid sort column'
+    ]);
+}
+
+// Validate sorting direction
+if (!in_array($order, ['asc', 'desc'], true)) {
+    respond(400, [
+        'error' => 'Invalid sort order. Use asc or desc'
+    ]);
+}
+
+// Convert direction to SQL format
+$order = strtoupper($order);
+
+    // Count total events matching search and status filter
+$countQuery = $conn->prepare(
+    "SELECT COUNT(*) AS total
+     FROM events
+     WHERE event_name LIKE ?
+     AND (? = '' OR status = ?)"
+);
+
+// Bind search keyword and status filter
+$countQuery->bind_param(
+    'sss',
+    $searchPattern,
+    $statusFilter,
+    $statusFilter
+);
+
+$countQuery->execute();
+
+// Get total matching records
+$total = (int) $countQuery->get_result()->fetch_assoc()['total'];
+
+    // Retrieve events matching search and status filter
+// with pagination
+$s = $conn->prepare(
+    "SELECT $fields
+     FROM events
+     WHERE event_name LIKE ?
+     AND (? = '' OR status = ?)
+     ORDER BY $sort $order, event_id ASC
+     LIMIT ? OFFSET ?"
+);
+
+// Bind search, status, limit, and offset parameters
+$s->bind_param(
+    'sssii',
+    $searchPattern,
+    $statusFilter,
+    $statusFilter,
+    $limit,
+    $offset
+);
+
+$s->execute();
+
+$events = $s->get_result()->fetch_all(MYSQLI_ASSOC);
 
     respond(200, [
-        'data' => $r->fetch_all(MYSQLI_ASSOC),
+        'data' => $events,
+        'pagination' => [
+            'current_page' => $page,
+            'per_page' => $limit,
+            'total_records' => $total,
+            'total_pages' => (int) ceil($total / $limit)
+        ]
     ]);
+
+    
 }
 
 // POST / PUT
