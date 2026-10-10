@@ -7,3 +7,9 @@ RewriteRule ^venues/([0-9]+)/?$ venues.php?id=$1 [QSA,L]
 
 RewriteRule ^events/?$ events.php [QSA,L]
 RewriteRule ^events/([0-9]+)/?$ events.php?id=$1 [QSA,L]
+
+RewriteRule ^users/?$ users.php [QSA,L]
+RewriteRule ^users/([0-9]+)/?$ users.php?id=$1 [QSA,L]
+
+RewriteRule ^bookings/?$ bookings.php [QSA,L]
+RewriteRule ^bookings/([0-9]+)/?$ bookings.php?id=$1 [QSA,L]
