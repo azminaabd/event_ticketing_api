@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>EventDesk | Event Ticketing &amp; Venue Booking</title>
+  <link rel="stylesheet" href="style.css?v=full-v1">
+  <script src="app.js?v=full-v1" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <div class="brand"><div class="brand-mark" aria-hidden="true">E</div><div><strong>EventDesk</strong><span>Event Ticketing &amp; Venue Booking</span></div></div>
+      <div class="header-right"><span class="environment">Local demonstration</span><button class="header-refresh" type="button" id="refreshBtn">↻ Refresh data</button></div>
+    </div>
+  </header>
+  <main class="container">
+    <section class="page-title"><div><h1>Event management</h1><p>Manage venues, organise events and book tickets in one place.</p></div></section>
+    <div class="dev-note" role="note"><strong>Local prototype:</strong> Role selection is for demonstration, not secure login. The backend needs Member 4's JWT authentication and access controls before deployment. Use only sample data and test passwords.</div>
+    <nav class="role-tabs" aria-label="Select dashboard" id="roleTabs">
+      <button type="button" data-role="ADMIN" aria-pressed="true">Administrator</button>
+      <button type="button" data-role="ORGANISER" aria-pressed="false">Organiser</button>
+      <button type="button" data-role="CUSTOMER" aria-pressed="false">Customer</button>
+    </nav>
+    <div class="dashboard-top">
+      <div><h2 id="roleHeading">Administrator dashboard</h2><p id="roleDescription" class="text-muted">View users, venues and system activity.</p></div>
+      <label class="actor-picker" id="actorPicker" hidden><span id="actorLabel">Select account</span><select id="actorSelect"></select></label>
+    </div>
+    <div class="notice" id="globalNotice" role="status" aria-live="polite">Connecting to your API...</div>
+
+    <section class="role-content" id="adminView">
+      <div class="stat-grid" id="adminStats"></div>
+      <div class="two-column top-spaced">
+        <section class="card"><div class="card-heading"><h3>Registered users</h3><span class="api-tag">GET /users</span></div><div id="usersTable" class="table-wrapper"></div></section>
+        <section class="card"><div class="card-heading"><h3>Venues</h3><span class="api-tag">GET /venues</span></div><div id="venuesTable" class="table-wrapper"></div></section>
+      </div>
+      <section class="card top-spaced"><div class="card-heading"><div><h3>Customer registration</h3><p>Create a customer account using the registration API.</p></div><span class="api-tag">POST /users</span></div>
+        <form id="registerForm" class="form-grid columns-3">
+          <label>Full name<input name="name" type="text" minlength="2" maxlength="100" autocomplete="off" placeholder="e.g. Frontend Customer" required></label>
+          <label>Email address<input name="email" type="email" maxlength="150" autocomplete="off" placeholder="e.g. customer.demo@example.com" required></label>
+          <label>Password<input name="password" type="password" minlength="8" maxlength="72" autocomplete="new-password" placeholder="At least 8 characters" required></label>
+          <div class="form-footer"><button class="btn btn-primary" type="submit">Create customer</button><span class="helper">A new account receives the Customer role.</span></div>
+        </form><p id="registerMessage" class="form-message" role="status" aria-live="polite"></p>
+      </section>
+      <section class="card top-spaced"><div class="card-heading"><div><h3>Customer management</h3><p>Update or remove a customer account created for this demonstration.</p></div><span class="api-tag">PUT /users/:id · DELETE /users/:id</span></div>
+        <form id="userEditForm" class="form-grid columns-3">
+          <label>Customer<select id="manageUserId" name="user_id" required></select></label>
+          <label>Full name<input name="name" maxlength="100" required placeholder="Updated full name"></label>
+          <label>Email address<input name="email" type="email" maxlength="150" required placeholder="new-email@example.com"></label>
+          <div class="form-footer"><button type="submit" class="btn btn-primary">Update customer</button><button type="button" id="deleteUserBtn" class="btn btn-danger">Delete customer</button><span class="helper">Original sample users are protected in this demo.</span></div>
+        </form><p class="helper block-helper">The Users API does not return email addresses, so enter the new email when updating.</p>
+        <p id="userEditMessage" class="form-message" role="status" aria-live="polite"></p>
+      </section>
+      <section class="card top-spaced"><div class="card-heading"><div><h3>Venue management</h3><p>Create and maintain venues for events.</p></div><span class="api-tag">POST /venues · PUT /venues/:id · DELETE /venues/:id</span></div>
+        <div class="two-column form-panels">
+          <div><h4>Create venue</h4><form id="venueCreateForm" class="form-grid columns-2">
+            <label>Venue name<input name="venue_name" maxlength="150" required placeholder="e.g. Innovation Hall"></label>
+            <label>Location<input name="location" maxlength="255" required placeholder="e.g. Kuala Lumpur"></label>
+            <label>Capacity<input name="capacity" type="number" min="1" max="999999" step="1" required placeholder="200"></label>
+            <label>Status<select name="status"><option value="ACTIVE">Active</option><option value="INACTIVE">Inactive</option></select></label>
+            <div class="form-footer"><button type="submit" class="btn btn-primary">Create venue</button></div>
+          </form><p id="venueCreateMessage" class="form-message" role="status" aria-live="polite"></p></div>
+          <div><h4>Edit venue</h4><form id="venueEditForm" class="form-grid columns-2">
+            <label class="full-width">Venue to edit<select id="manageVenueId" name="venue_id" required></select></label>
+            <label>Venue name<input name="venue_name" maxlength="150" required></label>
+            <label>Location<input name="location" maxlength="255" required></label>
+            <label>Capacity<input name="capacity" type="number" min="1" max="999999" step="1" required></label>
+            <label>Status<select name="status"><option value="ACTIVE">Active</option><option value="INACTIVE">Inactive</option></select></label>
+            <div class="form-footer"><button type="submit" class="btn btn-primary">Save changes</button><button id="deleteVenueBtn" type="button" class="btn btn-danger">Delete venue</button></div>
+          </form><p id="venueEditMessage" class="form-message" role="status" aria-live="polite"></p></div>
+        </div>
+        <p class="helper block-helper">For testing, only venues created after the original five sample venues can be edited or deleted. Venues used by events cannot be deleted.</p>
+      </section>
+      <section class="card top-spaced"><div class="card-heading"><h3>System bookings</h3><span class="api-tag">GET /bookings</span></div><div id="allBookingsTable" class="table-wrapper"></div></section>
+    </section>
+
+    <section class="role-content" id="organiserView" hidden>
+      <div class="stat-grid" id="organiserStats"></div>
+      <section class="card top-spaced"><div class="card-heading"><h3>My events</h3><span class="api-tag">GET /events</span></div><div id="organiserEventsTable" class="table-wrapper"></div></section>
+      <section class="card top-spaced"><div class="card-heading"><div><h3>Create event</h3><p>Set an event date, venue and ticket allocation.</p></div><span class="api-tag">POST /events</span></div>
+        <form id="eventCreateForm" class="form-grid columns-3 event-form">
+          <label class="span-2">Event name<input name="event_name" maxlength="150" required placeholder="e.g. Technology Expo"></label>
+          <label>Venue<select name="venue_id" class="active-venue-select" required></select></label>
+          <label>Event date<input name="event_date" class="future-date" type="date" required></label>
+          <label>Start time<input name="start_time" type="time" value="09:00" step="60" required></label>
+          <label>End time<input name="end_time" type="time" value="17:00" step="60" required></label>
+          <label>Price (RM)<input name="ticket_price" type="number" min="0" step="0.01" value="20.00" required></label>
+          <label>Number of tickets<input name="ticket_quantity" type="number" min="1" step="1" value="100" required></label>
+          <label>Status<select name="status"><option value="ACTIVE">Active</option><option value="CANCELLED">Cancelled</option><option value="COMPLETED">Completed</option></select></label>
+          <label class="full-width">Description<textarea name="description" rows="2" placeholder="Brief description of the event"></textarea></label>
+          <div class="form-footer"><button class="btn btn-primary" type="submit">Create event</button></div>
+        </form><p id="eventCreateMessage" class="form-message" role="status" aria-live="polite"></p>
+      </section>
+      <section class="card top-spaced"><div class="card-heading"><div><h3>Manage events</h3><p>Edit or delete events created for this demonstration.</p></div><span class="api-tag">PUT /events/:id · DELETE /events/:id</span></div>
+        <form id="eventEditForm" class="form-grid columns-3 event-form">
+          <label class="full-width">Event to manage<select id="manageEventId" name="event_id" required></select></label>
+          <label class="span-2">Event name<input name="event_name" maxlength="150" required></label>
+          <label>Venue<select name="venue_id" class="active-venue-select" required></select></label>
+          <label>Event date<input name="event_date" type="date" required></label>
+          <label>Start time<input name="start_time" type="time" step="60" required></label>
+          <label>End time<input name="end_time" type="time" step="60" required></label>
+          <label>Price (RM)<input name="ticket_price" type="number" min="0" step="0.01" required></label>
+          <label>Number of tickets<input name="ticket_quantity" type="number" min="1" step="1" required></label>
+          <label>Status<select name="status"><option value="ACTIVE">Active</option><option value="CANCELLED">Cancelled</option><option value="COMPLETED">Completed</option></select></label>
+          <label class="full-width">Description<textarea name="description" rows="2"></textarea></label>
+          <div class="form-footer"><button type="submit" class="btn btn-primary">Save event</button><button type="button" id="deleteEventBtn" class="btn btn-danger">Delete event</button></div>
+        </form>
+        <p class="helper block-helper">Original events cannot be changed through this local demo. Events with bookings cannot be deleted.</p><p id="eventEditMessage" class="form-message" role="status" aria-live="polite"></p>
+      </section>
+      <section class="card top-spaced"><div class="card-heading"><div><h3>Bookings for my events</h3><p>Confirm pending bookings for your events.</p></div><span class="api-tag">GET /bookings · PUT /bookings/:id</span></div><div id="organiserBookingsTable" class="table-wrapper"></div><p id="organiserBookingMessage" class="form-message" role="status" aria-live="polite"></p></section>
+    </section>
+
+    <section class="role-content" id="customerView" hidden>
+      <div class="stat-grid" id="customerStats"></div>
+      <section class="card top-spaced"><div class="card-heading"><div><h3>Find an event</h3><p>Browse active events and book available tickets.</p></div><span class="api-tag">GET /events · POST /bookings</span></div>
+        <div class="filter-bar"><label class="search-box">Search events<input id="eventSearch" type="search" placeholder="Search by event or venue"></label><label>Status<select id="eventFilter"><option value="AVAILABLE">Available to book</option><option value="ALL">All events</option></select></label></div>
+        <div id="eventCards" class="event-cards"></div><p id="customerBookMessage" class="form-message" role="status" aria-live="polite"></p>
+      </section>
+      <section class="card top-spaced"><div class="card-heading"><div><h3>My bookings</h3><p>Check booking details and cancel eligible bookings.</p></div><span class="api-tag">GET /bookings · DELETE /bookings/:id</span></div><div id="customerBookingsTable" class="table-wrapper"></div><p id="customerCancelMessage" class="form-message" role="status" aria-live="polite"></p></section>
+    </section>
+    <footer><span>EventDesk · Web API Development</span><span>PHP / MySQL REST API · Local demonstration</span></footer>
+  </main>
+</body>
+</html>
