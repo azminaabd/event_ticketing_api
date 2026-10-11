@@ -14,6 +14,9 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 $id = isset($_GET['id']) ? validId($_GET['id']) : null;
 
+require_once __DIR__ . '/middleware/security.php';
+securityGate($conn, 'venues', $method, $id);
+
 if (isset($_GET['id']) && $id === null) {
     respond(400, ['error' => 'Invalid venue ID']);
 }
