@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EventHub - Event Overview</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="dashboard-body">
+
+<nav class="navbar custom-navbar">
+
+    <div class="container">
+
+        <a
+            class="navbar-brand brand-name"
+            href="dashboard.html"
+        >
+            EventHub Organiser
+        </a>
+
+        <a
+            href="dashboard.html"
+            class="btn logout-btn"
+        >
+            Dashboard
+        </a>
+
+    </div>
+
+</nav>
+
+
+<div class="container py-5">
+
+    <div class="mb-5">
+
+        <h2 class="fw-bold">
+            Event Overview
+        </h2>
+
+        <p class="text-muted">
+            Monitor ticket bookings and remaining ticket availability
+            for your events.
+        </p>
+
+    </div>
+
+
+    <!-- OVERALL SUMMARY -->
+
+    <div class="row g-4 mb-5">
+
+        <div class="col-md-3">
+
+            <div class="record-card">
+
+                <h6>
+                    Total Events
+                </h6>
+
+                <h2 id="totalEvents">
+                    0
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-3">
+
+            <div class="record-card">
+
+                <h6>
+                    Tickets Booked
+                </h6>
+
+                <h2 id="totalBooked">
+                    0
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-3">
+
+            <div class="record-card">
+
+                <h6>
+                    Tickets Remaining
+                </h6>
+
+                <h2 id="totalRemaining">
+                    0
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-3">
+
+            <div class="record-card">
+
+                <h6>
+                    Confirmed Bookings
+                </h6>
+
+                <h2 id="confirmedBookings">
+                    0
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- EVENT TICKET OVERVIEW -->
+
+    <div class="card shadow-sm border-0">
+
+        <div class="card-body">
+
+            <h4 class="fw-bold mb-4">
+                Ticket Availability by Event
+            </h4>
+
+
+            <div class="table-responsive">
+
+                <table class="table align-middle">
+
+                    <thead>
+
+                    <tr>
+                        <th>Event</th>
+                        <th>Date</th>
+                        <th>Venue</th>
+                        <th>Booked</th>
+                        <th>Tickets Left</th>
+                        <th>Status</th>
+                    </tr>
+
+                    </thead>
+
+
+                    <tbody id="overviewTableBody">
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   LOGIN CHECK
+========================= */
+
+const token =
+    localStorage.getItem("token");
+
+const role =
+    localStorage.getItem("role");
+
+
+if (!token) {
+
+    window.location.href =
+        "../login.html";
+}
+
+
+if (role !== "ORGANISER") {
+
+    alert("Access denied");
+
+    window.location.href =
+        "../login.html";
+}
+
+
+const eventApi =
+    "http://localhost/event_ticketing_system/api/events/";
+
+const bookingApi =
+    "http://localhost/event_ticketing_system/api/bookings/";
+
+
+
+/* =========================
+   LOAD OVERVIEW
+========================= */
+
+async function loadOverview() {
+
+    try {
+
+        /* GET ORGANISER EVENTS */
+
+        const eventResponse =
+            await fetch(
+                eventApi,
+                {
+                    method: "GET",
+
+                    headers: {
+                        "Authorization":
+                            "Bearer " + token
+                    }
+                }
+            );
+
+
+        const events =
+            await eventResponse.json();
+
+
+        if (!eventResponse.ok) {
+
+            alert(
+                events.message ||
+                "Unable to load events."
+            );
+
+            return;
+        }
+
+
+        /* GET BOOKINGS FOR ORGANISER EVENTS */
+
+        const bookingResponse =
+            await fetch(
+                bookingApi,
+                {
+                    method: "GET",
+
+                    headers: {
+                        "Authorization":
+                            "Bearer " + token
+                    }
+                }
+            );
+
+
+        const bookings =
+            await bookingResponse.json();
+
+
+        if (!bookingResponse.ok) {
+
+            alert(
+                bookings.message ||
+                "Unable to load bookings."
+            );
+
+            return;
+        }
+
+
+        displayOverview(
+            events,
+            bookings
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        alert(
+            "Unable to connect to server."
+        );
+    }
+}
+
+
+
+/* =========================
+   DISPLAY OVERVIEW
+========================= */
+
+function displayOverview(
+    events,
+    bookings
+) {
+
+    const tbody =
+        document.getElementById(
+            "overviewTableBody"
+        );
+
+
+    tbody.innerHTML = "";
+
+
+    let totalBooked = 0;
+
+    let totalRemaining = 0;
+
+    let confirmedCount = 0;
+
+
+    /* COUNT CONFIRMED BOOKINGS */
+
+    bookings.forEach(booking => {
+
+        if (
+            booking.booking_status ===
+            "CONFIRMED"
+        ) {
+
+            confirmedCount++;
+        }
+    });
+
+
+    /* PROCESS EACH EVENT */
+
+    events.forEach(event => {
+
+        let bookedTickets = 0;
+
+
+        /*
+            Find confirmed bookings
+            belonging to this event
+        */
+
+        bookings.forEach(booking => {
+
+            if (
+                booking.event_id ==
+                    event.event_id
+                &&
+                booking.booking_status ===
+                    "CONFIRMED"
+            ) {
+
+                bookedTickets +=
+                    parseInt(
+                        booking.quantity
+                    );
+            }
+
+        });
+
+
+        const remainingTickets =
+            parseInt(
+                event.ticket_quantity
+            );
+
+
+        totalBooked +=
+            bookedTickets;
+
+
+        totalRemaining +=
+            remainingTickets;
+
+
+        let statusClass =
+            "bg-primary";
+
+
+        if (
+            event.status === "ACTIVE"
+        ) {
+
+            statusClass =
+                "bg-success";
+        }
+
+
+        else if (
+            event.status === "CANCELLED"
+        ) {
+
+            statusClass =
+                "bg-danger";
+        }
+
+
+        else if (
+            event.status === "COMPLETED"
+        ) {
+
+            statusClass =
+                "bg-secondary";
+        }
+
+
+        tbody.innerHTML += `
+
+            <tr>
+
+                <td>
+
+                    <strong>
+                        ${event.event_name}
+                    </strong>
+
+                </td>
+
+
+                <td>
+                    ${event.event_date}
+                </td>
+
+
+                <td>
+                    ${event.venue_name}
+                </td>
+
+
+                <td>
+
+                    <span
+                        class="badge bg-info text-dark"
+                    >
+                        ${bookedTickets}
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <strong>
+                        ${remainingTickets}
+                    </strong>
+
+                </td>
+
+
+                <td>
+
+                    <span
+                        class="badge ${statusClass}"
+                    >
+                        ${event.status}
+                    </span>
+
+                </td>
+
+            </tr>
+        `;
+
+    });
+
+
+    /* NO EVENTS */
+
+    if (events.length === 0) {
+
+        tbody.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="6"
+                    class="text-center text-muted py-4"
+                >
+                    No events available.
+                </td>
+
+            </tr>
+        `;
+    }
+
+
+    /* SUMMARY */
+
+    document.getElementById(
+        "totalEvents"
+    ).innerText =
+        events.length;
+
+
+    document.getElementById(
+        "totalBooked"
+    ).innerText =
+        totalBooked;
+
+
+    document.getElementById(
+        "totalRemaining"
+    ).innerText =
+        totalRemaining;
+
+
+    document.getElementById(
+        "confirmedBookings"
+    ).innerText =
+        confirmedCount;
+}
+
+
+
+loadOverview();
+
+</script>
+
+</body>
+
+</html>

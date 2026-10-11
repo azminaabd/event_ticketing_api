@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EventHub - Manage Events</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="dashboard-body">
+
+<nav class="navbar custom-navbar">
+
+    <div class="container">
+
+        <a
+            class="navbar-brand brand-name"
+            href="dashboard.html"
+        >
+            EventHub Organiser
+        </a>
+
+        <a
+            href="dashboard.html"
+            class="btn logout-btn"
+        >
+            Dashboard
+        </a>
+
+    </div>
+
+</nav>
+
+
+<div class="container py-5">
+
+    <!-- TITLE -->
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h2 class="fw-bold">
+                Manage Events
+            </h2>
+
+            <p class="text-muted">
+                View ongoing events and manage your event information.
+            </p>
+
+        </div>
+
+
+        <button
+            class="btn dashboard-button"
+            data-bs-toggle="modal"
+            data-bs-target="#eventModal"
+            onclick="openAddEvent()"
+        >
+            + Add Event
+        </button>
+
+    </div>
+
+
+    <!-- SUMMARY -->
+
+    <div class="row g-4 mb-5">
+
+        <div class="col-md-4">
+
+            <div class="record-card">
+
+                <h6>
+                    Total Events
+                </h6>
+
+                <h2 id="totalEvents">
+                    0
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="record-card">
+
+                <h6>
+                    Ongoing Events
+                </h6>
+
+                <h2 id="ongoingEvents">
+                    0
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="record-card">
+
+                <h6>
+                    Upcoming Events
+                </h6>
+
+                <h2 id="upcomingEvents">
+                    0
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ONGOING EVENTS -->
+
+    <div class="card shadow-sm border-0 mb-5">
+
+        <div class="card-body">
+
+            <h4 class="fw-bold mb-3">
+                Current / Ongoing Events
+            </h4>
+
+            <div
+                id="ongoingEventArea"
+                class="row g-3"
+            >
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ALL EVENTS -->
+
+    <div class="card shadow-sm border-0">
+
+        <div class="card-body">
+
+            <h4 class="fw-bold mb-4">
+                My Event Records
+            </h4>
+
+
+            <div class="table-responsive">
+
+                <table class="table align-middle">
+
+                    <thead>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Event</th>
+                        <th>Venue</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Price</th>
+                        <th>Tickets</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+
+                    </thead>
+
+
+                    <tbody id="eventTableBody">
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- EVENT MODAL -->
+
+<div
+    class="modal fade"
+    id="eventModal"
+    tabindex="-1"
+>
+
+    <div class="modal-dialog modal-lg">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5
+                    class="modal-title"
+                    id="eventModalTitle"
+                >
+                    Add Event
+                </h5>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                >
+                </button>
+
+            </div>
+
+
+            <div class="modal-body">
+
+                <input
+                    type="hidden"
+                    id="eventId"
+                >
+
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Event Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="eventName"
+                            class="form-control"
+                        >
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Venue
+                        </label>
+
+                        <select
+                            id="venueId"
+                            class="form-select"
+                        >
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Description
+                    </label>
+
+                    <textarea
+                        id="eventDescription"
+                        class="form-control"
+                        rows="3"
+                    ></textarea>
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="col-md-4 mb-3">
+
+                        <label class="form-label">
+                            Event Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="eventDate"
+                            class="form-control"
+                        >
+
+                    </div>
+
+
+                    <div class="col-md-4 mb-3">
+
+                        <label class="form-label">
+                            Start Time
+                        </label>
+
+                        <input
+                            type="time"
+                            id="startTime"
+                            class="form-control"
+                        >
+
+                    </div>
+
+
+                    <div class="col-md-4 mb-3">
+
+                        <label class="form-label">
+                            End Time
+                        </label>
+
+                        <input
+                            type="time"
+                            id="endTime"
+                            class="form-control"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="col-md-4 mb-3">
+
+                        <label class="form-label">
+                            Ticket Price
+                        </label>
+
+                        <input
+                            type="number"
+                            id="ticketPrice"
+                            class="form-control"
+                            min="0"
+                            step="0.01"
+                        >
+
+                    </div>
+
+
+                    <div class="col-md-4 mb-3">
+
+                        <label class="form-label">
+                            Available Tickets
+                        </label>
+
+                        <input
+                            type="number"
+                            id="ticketQuantity"
+                            class="form-control"
+                            min="0"
+                        >
+
+                    </div>
+
+
+                    <div class="col-md-4 mb-3">
+
+                        <label class="form-label">
+                            Event Status
+                        </label>
+
+                        <select
+                            id="eventStatus"
+                            class="form-select"
+                        >
+
+                            <option value="ACTIVE">
+                                Active
+                            </option>
+
+                            <option value="CANCELLED">
+                                Cancelled
+                            </option>
+
+                            <option value="COMPLETED">
+                                Completed
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <p
+                    id="eventMessage"
+                    class="text-center"
+                >
+                </p>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    type="button"
+                    class="btn dashboard-button"
+                    onclick="saveEvent()"
+                >
+                    Save Event
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+<script>
+
+/* =========================
+   LOGIN
+========================= */
+
+const token =
+    localStorage.getItem("token");
+
+const role =
+    localStorage.getItem("role");
+
+
+if (!token) {
+
+    window.location.href =
+        "../login.html";
+}
+
+
+if (role !== "ORGANISER") {
+
+    alert("Access denied");
+
+    window.location.href =
+        "../login.html";
+}
+
+
+const eventApi =
+    "http://localhost/event_ticketing_system/api/events/";
+
+const venueApi =
+    "http://localhost/event_ticketing_system/api/venues/";
+
+
+let allEvents = [];
+
+
+/* =========================
+   LOAD VENUES
+========================= */
+
+async function loadVenues() {
+
+    try {
+
+        const response =
+            await fetch(
+                venueApi,
+                {
+                    headers: {
+                        "Authorization":
+                            "Bearer " + token
+                    }
+                }
+            );
+
+
+        const venues =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            console.log(venues);
+
+            return;
+        }
+
+
+        const select =
+            document.getElementById(
+                "venueId"
+            );
+
+
+        select.innerHTML =
+            '<option value="">Select venue</option>';
+
+
+        venues.forEach(venue => {
+
+            if (venue.status === "ACTIVE") {
+
+                select.innerHTML += `
+
+                    <option
+                        value="${venue.venue_id}"
+                    >
+                        ${venue.venue_name}
+                    </option>
+                `;
+            }
+
+        });
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+    }
+}
+
+
+/* =========================
+   DETERMINE EVENT STATE
+========================= */
+
+function getEventState(event) {
+
+    if (event.status === "CANCELLED") {
+
+        return "CANCELLED";
+    }
+
+
+    if (event.status === "COMPLETED") {
+
+        return "COMPLETED";
+    }
+
+
+    const now =
+        new Date();
+
+
+    const start =
+        new Date(
+            event.event_date +
+            "T" +
+            event.start_time
+        );
+
+
+    const end =
+        new Date(
+            event.event_date +
+            "T" +
+            event.end_time
+        );
+
+
+    if (
+        now >= start &&
+        now <= end
+    ) {
+
+        return "ONGOING";
+    }
+
+
+    if (now < start) {
+
+        return "UPCOMING";
+    }
+
+
+    return "COMPLETED";
+}
+
+
+/* =========================
+   LOAD EVENTS
+========================= */
+
+async function loadEvents() {
+
+    try {
+
+        const response =
+            await fetch(
+                eventApi,
+                {
+                    method: "GET",
+
+                    headers: {
+                        "Authorization":
+                            "Bearer " + token
+                    }
+                }
+            );
+
+
+        const events =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            alert(
+                events.message ||
+                "Unable to load events"
+            );
+
+            return;
+        }
+
+
+        allEvents = events;
+
+
+        displayEvents();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+
+        alert(
+            "Unable to connect to server"
+        );
+    }
+}
+
+
+/* =========================
+   DISPLAY EVENTS
+========================= */
+
+function displayEvents() {
+
+    const tbody =
+        document.getElementById(
+            "eventTableBody"
+        );
+
+
+    const ongoingArea =
+        document.getElementById(
+            "ongoingEventArea"
+        );
+
+
+    tbody.innerHTML = "";
+
+    ongoingArea.innerHTML = "";
+
+
+    let ongoingCount = 0;
+
+    let upcomingCount = 0;
+
+
+    document.getElementById(
+        "totalEvents"
+    ).innerText =
+        allEvents.length;
+
+
+    if (allEvents.length === 0) {
+
+        tbody.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="9"
+                    class="text-center text-muted py-4"
+                >
+                    You have not created any events yet.
+                    Click "+ Add Event" to create your first event.
+                </td>
+
+            </tr>
+        `;
+
+
+        ongoingArea.innerHTML = `
+
+            <div class="col-12">
+
+                <p class="text-muted mb-0">
+                    No ongoing events.
+                </p>
+
+            </div>
+        `;
+
+
+        return;
+    }
+
+
+    allEvents.forEach(event => {
+
+        const eventState =
+            getEventState(event);
+
+
+        let badgeClass =
+            "bg-primary";
+
+
+        if (eventState === "ONGOING") {
+
+            badgeClass =
+                "bg-success";
+
+            ongoingCount++;
+
+
+            ongoingArea.innerHTML += `
+
+                <div class="col-md-6">
+
+                    <div class="record-card">
+
+                        <div
+                            class="d-flex justify-content-between"
+                        >
+
+                            <h5 class="fw-bold">
+                                ${event.event_name}
+                            </h5>
+
+                            <span
+                                class="badge bg-success"
+                            >
+                                ONGOING
+                            </span>
+
+                        </div>
+
+
+                        <p class="mb-2 text-muted">
+                            ${event.venue_name}
+                        </p>
+
+
+                        <p class="mb-2">
+                            Date:
+                            ${event.event_date}
+                        </p>
+
+
+                        <p class="mb-2">
+                            Time:
+                            ${event.start_time}
+                            -
+                            ${event.end_time}
+                        </p>
+
+
+                        <p class="mb-0">
+                            Available Tickets:
+                            ${event.ticket_quantity}
+                        </p>
+
+                    </div>
+
+                </div>
+            `;
+        }
+
+
+        else if (
+            eventState === "UPCOMING"
+        ) {
+
+            badgeClass =
+                "bg-primary";
+
+            upcomingCount++;
+        }
+
+
+        else if (
+            eventState === "COMPLETED"
+        ) {
+
+            badgeClass =
+                "bg-secondary";
+        }
+
+
+        else if (
+            eventState === "CANCELLED"
+        ) {
+
+            badgeClass =
+                "bg-danger";
+        }
+
+
+        tbody.innerHTML += `
+
+            <tr>
+
+                <td>
+                    ${event.event_id}
+                </td>
+
+
+                <td>
+                    ${event.event_name}
+                </td>
+
+
+                <td>
+                    ${event.venue_name}
+                </td>
+
+
+                <td>
+                    ${event.event_date}
+                </td>
+
+
+                <td>
+                    ${event.start_time}
+                    -
+                    ${event.end_time}
+                </td>
+
+
+                <td>
+                    RM
+                    ${parseFloat(
+                        event.ticket_price
+                    ).toFixed(2)}
+                </td>
+
+
+                <td>
+                    ${event.ticket_quantity}
+                </td>
+
+
+                <td>
+
+                    <span
+                        class="badge ${badgeClass}"
+                    >
+                        ${eventState}
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <button
+                        class="btn btn-warning btn-sm"
+                        onclick='editEvent(
+                            ${JSON.stringify(event)}
+                        )'
+                    >
+                        Edit
+                    </button>
+
+
+                    <button
+                        class="btn btn-danger btn-sm"
+                        onclick="deleteEvent(
+                            ${event.event_id}
+                        )"
+                    >
+                        Delete
+                    </button>
+
+                </td>
+
+            </tr>
+        `;
+
+    });
+
+
+    document.getElementById(
+        "ongoingEvents"
+    ).innerText =
+        ongoingCount;
+
+
+    document.getElementById(
+        "upcomingEvents"
+    ).innerText =
+        upcomingCount;
+
+
+    if (ongoingCount === 0) {
+
+        ongoingArea.innerHTML = `
+
+            <div class="col-12">
+
+                <p class="text-muted mb-0">
+                    There are currently no ongoing events.
+                </p>
+
+            </div>
+        `;
+    }
+}
+
+
+/* =========================
+   ADD EVENT
+========================= */
+
+function openAddEvent() {
+
+    document.getElementById(
+        "eventModalTitle"
+    ).innerText =
+        "Add Event";
+
+
+    document.getElementById(
+        "eventId"
+    ).value = "";
+
+
+    document.getElementById(
+        "eventName"
+    ).value = "";
+
+
+    document.getElementById(
+        "eventDescription"
+    ).value = "";
+
+
+    document.getElementById(
+        "eventDate"
+    ).value = "";
+
+
+    document.getElementById(
+        "startTime"
+    ).value = "";
+
+
+    document.getElementById(
+        "endTime"
+    ).value = "";
+
+
+    document.getElementById(
+        "ticketPrice"
+    ).value = "";
+
+
+    document.getElementById(
+        "ticketQuantity"
+    ).value = "";
+
+
+    document.getElementById(
+        "eventStatus"
+    ).value =
+        "ACTIVE";
+
+
+    document.getElementById(
+        "eventMessage"
+    ).innerText = "";
+}
+
+
+/* =========================
+   EDIT EVENT
+========================= */
+
+function editEvent(event) {
+
+    document.getElementById(
+        "eventModalTitle"
+    ).innerText =
+        "Edit Event";
+
+
+    document.getElementById(
+        "eventId"
+    ).value =
+        event.event_id;
+
+
+    document.getElementById(
+        "eventName"
+    ).value =
+        event.event_name;
+
+
+    document.getElementById(
+        "venueId"
+    ).value =
+        event.venue_id;
+
+
+    document.getElementById(
+        "eventDescription"
+    ).value =
+        event.description || "";
+
+
+    document.getElementById(
+        "eventDate"
+    ).value =
+        event.event_date;
+
+
+    document.getElementById(
+        "startTime"
+    ).value =
+        event.start_time;
+
+
+    document.getElementById(
+        "endTime"
+    ).value =
+        event.end_time;
+
+
+    document.getElementById(
+        "ticketPrice"
+    ).value =
+        event.ticket_price;
+
+
+    document.getElementById(
+        "ticketQuantity"
+    ).value =
+        event.ticket_quantity;
+
+
+    document.getElementById(
+        "eventStatus"
+    ).value =
+        event.status;
+
+
+    document.getElementById(
+        "eventMessage"
+    ).innerText =
+        "";
+
+
+    const modal =
+        new bootstrap.Modal(
+            document.getElementById(
+                "eventModal"
+            )
+        );
+
+
+    modal.show();
+}
+
+
+/* =========================
+   SAVE EVENT
+========================= */
+
+async function saveEvent() {
+
+    const id =
+        document.getElementById(
+            "eventId"
+        ).value;
+
+
+    const eventName =
+        document.getElementById(
+            "eventName"
+        ).value.trim();
+
+
+    const venueId =
+        document.getElementById(
+            "venueId"
+        ).value;
+
+
+    const description =
+        document.getElementById(
+            "eventDescription"
+        ).value.trim();
+
+
+    const eventDate =
+        document.getElementById(
+            "eventDate"
+        ).value;
+
+
+    const startTime =
+        document.getElementById(
+            "startTime"
+        ).value;
+
+
+    const endTime =
+        document.getElementById(
+            "endTime"
+        ).value;
+
+
+    const ticketPrice =
+        parseFloat(
+            document.getElementById(
+                "ticketPrice"
+            ).value
+        );
+
+
+    const ticketQuantity =
+        parseInt(
+            document.getElementById(
+                "ticketQuantity"
+            ).value
+        );
+
+
+    const status =
+        document.getElementById(
+            "eventStatus"
+        ).value;
+
+
+    const message =
+        document.getElementById(
+            "eventMessage"
+        );
+
+
+    if (
+        !eventName ||
+        !venueId ||
+        !eventDate ||
+        !startTime ||
+        !endTime ||
+        isNaN(ticketPrice) ||
+        isNaN(ticketQuantity)
+    ) {
+
+        message.innerText =
+            "Please complete all required fields.";
+
+        message.className =
+            "text-danger text-center";
+
+        return;
+    }
+
+
+    if (endTime <= startTime) {
+
+        message.innerText =
+            "End time must be after start time.";
+
+        message.className =
+            "text-danger text-center";
+
+        return;
+    }
+
+
+    let method =
+        "POST";
+
+
+    let url =
+        eventApi;
+
+
+    if (id) {
+
+        method =
+            "PUT";
+
+        url =
+            eventApi + "?id=" + id;
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                url,
+                {
+                    method: method,
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json",
+
+                        "Authorization":
+                            "Bearer " + token
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            venue_id:
+                                parseInt(venueId),
+
+                            event_name:
+                                eventName,
+
+                            description:
+                                description,
+
+                            event_date:
+                                eventDate,
+
+                            start_time:
+                                startTime,
+
+                            end_time:
+                                endTime,
+
+                            ticket_price:
+                                ticketPrice,
+
+                            ticket_quantity:
+                                ticketQuantity,
+
+                            status:
+                                status
+                        })
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            message.innerText =
+                data.message ||
+                "Unable to save event.";
+
+            message.className =
+                "text-danger text-center";
+
+            return;
+        }
+
+
+        message.innerText =
+            data.message ||
+            "Event saved successfully.";
+
+
+        message.className =
+            "text-success text-center";
+
+
+        setTimeout(
+            function () {
+
+                location.reload();
+
+            },
+
+            700
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+
+        message.innerText =
+            "Unable to connect to server.";
+
+
+        message.className =
+            "text-danger text-center";
+    }
+}
+
+
+/* =========================
+   DELETE EVENT
+========================= */
+
+async function deleteEvent(id) {
+
+    const confirmDelete =
+        confirm(
+            "Are you sure you want to delete this event?"
+        );
+
+
+    if (!confirmDelete) {
+
+        return;
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                eventApi + "?id=" + id,
+                {
+                    method: "DELETE",
+
+                    headers: {
+                        "Authorization":
+                            "Bearer " + token
+                    }
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            alert(
+                data.message ||
+                "Unable to delete event."
+            );
+
+            return;
+        }
+
+
+        alert(
+            "Event deleted successfully"
+        );
+
+
+        loadEvents();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+
+        alert(
+            "Unable to delete event"
+        );
+    }
+}
+
+
+/* =========================
+   START
+========================= */
+
+loadVenues();
+
+loadEvents();
+
+</script>
+
+</body>
+
+</html>
