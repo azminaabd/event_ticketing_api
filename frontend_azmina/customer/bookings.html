@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    My Bookings | Eventra
+  </title>
+
+  <link rel="stylesheet" href="../css/style.css?v=13" />
+</head>
+
+<body class="customer-body">
+
+  <!-- =====================================================
+       NAVIGATION
+  ====================================================== -->
+  <header class="customer-navbar">
+
+    <div class="customer-nav-inner">
+
+      <a class="customer-logo" href="dashboard.html">
+        Eventra
+      </a>
+
+
+      <nav class="customer-nav-links">
+
+        <a href="dashboard.html">
+          Home
+        </a>
+
+        <a href="events.html">
+          Browse Events
+        </a>
+
+        <a class="active" href="bookings.html">
+          My Bookings
+        </a>
+
+        <a href="profile.html">
+          My Profile
+        </a>
+
+      </nav>
+
+      <div class="customer-nav-user">
+
+        <div class="customer-user-info">
+
+          <strong data-user-name></strong>
+
+          <span data-user-role></span>
+
+        </div>
+
+        <button class="customer-signout" type="button" onclick="logoutAndGo()">
+          Sign out
+        </button>
+
+      </div>
+    </div>
+  </header>
+
+
+  <!-- =====================================================
+       MAIN CONTENT
+  ====================================================== -->
+  <main class="customer-main">
+
+    <!-- PAGE HEADING -->
+    <section class="customer-page-heading">
+
+      <p class="eyebrow">
+        CUSTOMER
+      </p>
+
+      <h1>
+        My Bookings
+      </h1>
+
+      <p>
+        View your bookings, complete payment and access your digital tickets.
+      </p>
+
+    </section>
+
+    <!-- =====================================================
+         SEARCH + FILTER
+    ====================================================== -->
+    <section class="toolbar customer-toolbar">
+
+      <input id="customerBookingSearch" type="search" placeholder="Search booking ID or event..." />
+
+      <select id="customerBookingStatusFilter">
+
+        <option value="">
+          All Statuses
+        </option>
+
+        <option value="PENDING">
+          Pending
+        </option>
+
+        <option value="CONFIRMED">
+          Confirmed
+        </option>
+
+        <option value="CANCELLED">
+          Cancelled
+        </option>
+
+      </select>
+
+    </section>
+
+    <!-- =====================================================
+         BOOKING HISTORY
+    ====================================================== -->
+    <section class="card section-card customer-card">
+
+      <div class="section-heading">
+
+        <h2>
+          Booking History
+        </h2>
+
+      </div>
+
+      <div class="table-wrap">
+
+        <table>
+          <thead>
+            <tr>
+              <th>Booking</th>
+              <th>Event</th>
+              <th>Quantity</th>
+              <th>Total</th>
+              <th>Status</th>
+              <th>Date</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <tbody id="customerBookingRows">
+
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ===================================================
+           PAGINATION
+      ==================================================== -->
+      <div class="customer-booking-pagination">
+
+        <button id="customerBookingPrevBtn" type="button" class="table-btn" onclick="previousCustomerBookingPage()">
+          Previous
+        </button>
+
+        <span id="customerBookingPageInfo">
+          Page 1 of 1
+        </span>
+
+        <button id="customerBookingNextBtn" type="button" class="table-btn" onclick="nextCustomerBookingPage()">
+          Next
+        </button>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- =====================================================
+       PAYMENT DIALOG
+  ====================================================== -->
+  <dialog id="paymentDialog" class="dialog">
+
+    <div class="dialog-card">
+
+      <button type="button" class="dialog-close" onclick="closePaymentDialog()">
+        ×
+      </button>
+
+      <p class="eyebrow">
+        PAYMENT
+      </p>
+
+      <h2>
+        Complete Payment
+      </h2>
+
+      <input id="paymentBookingId" type="hidden" />
+
+      <div class="payment-summary">
+
+        <div class="booking-detail-row">
+
+          <span>
+            Booking
+          </span>
+
+          <strong id="paymentBookingReference">
+            —
+          </strong>
+
+        </div>
+
+        <div class="booking-detail-row">
+
+          <span>
+            Event
+          </span>
+
+          <strong id="paymentEventName">
+            —
+          </strong>
+
+        </div>
+
+        <div class="booking-detail-row">
+
+          <span>
+            Quantity
+          </span>
+
+          <strong id="paymentQuantity">
+            —
+          </strong>
+
+        </div>
+
+        <div class="booking-detail-row">
+
+          <span>
+            Total
+          </span>
+
+          <strong id="paymentTotal">
+            —
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="field">
+
+        <label for="paymentMethod">
+          Payment Method
+        </label>
+
+        <select id="paymentMethod">
+
+          <option value="">
+            Select payment method
+          </option>
+
+          <option value="CARD">
+            Debit / Credit Card
+          </option>
+
+          <option value="ONLINE_BANKING">
+            Online Banking
+          </option>
+
+          <option value="EWALLET">
+            E-Wallet
+          </option>
+        </select>
+      </div>
+
+      <div class="dialog-actions">
+
+        <button type="button" class="btn btn-secondary" onclick="closePaymentDialog()">
+          Pay Later
+        </button>
+
+        <button id="payNowBtn" type="button" class="btn" onclick="payCurrentBooking()">
+          Pay Now
+        </button>
+
+      </div>
+
+    </div>
+
+  </dialog>
+
+  <!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
+  <script src="../js/common.js"></script>
+
+  <script src="../js/api.js"></script>
+
+  <script src="../js/auth.js"></script>
+
+  <script src="customer.js?v=13"></script>
+
+  <script>
+    initCustomerBookings()
+  </script>
+
+</body>
+</html>

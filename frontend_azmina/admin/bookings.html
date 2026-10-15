@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>
+        Manage Bookings | Eventra
+    </title>
+
+    <link rel="stylesheet" href="../css/style.css?v=8" />
+
+</head>
+
+
+<body class="app-body">
+
+
+    <!-- =====================================================
+       SIDEBAR
+  ====================================================== -->
+
+    <aside class="sidebar">
+
+        <a class="sidebar-logo" href="dashboard.html">
+            Eventra
+        </a>
+
+        <p class="sidebar-role">
+            Administrator
+        </p>
+
+
+        <nav>
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="users.html">
+                Manage Users
+            </a>
+
+            <a href="venues.html">
+                Manage Venues
+            </a>
+
+            <a class="active" href="bookings.html">
+                Manage Bookings
+            </a>
+
+        </nav>
+
+
+        <button class="sidebar-logout" type="button" onclick="logoutAndGo()">
+            Sign out
+        </button>
+
+    </aside>
+
+    <!-- =====================================================
+       MAIN CONTENT
+  ====================================================== -->
+
+    <main class="content">
+
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div>
+
+                <p class="eyebrow">
+                    ADMINISTRATOR
+                </p>
+
+                <h1>
+                    Manage Bookings
+                </h1>
+
+            </div>
+
+
+            <div class="user-chip">
+
+                <b data-user-name></b>
+
+                <span data-user-role></span>
+
+            </div>
+
+        </header>
+
+        <!-- =====================================================
+         SEARCH + FILTER
+    ====================================================== -->
+
+        <section class="toolbar">
+
+            <input id="bookingSearch" type="search" placeholder="Search booking, customer or event..." />
+
+            <select id="bookingStatusFilter">
+
+                <option value="">
+                    All Statuses
+                </option>
+
+                <option value="PENDING">
+                    Pending
+                </option>
+
+                <option value="CONFIRMED">
+                    Confirmed
+                </option>
+
+                <option value="CANCELLED">
+                    Cancelled
+                </option>
+
+            </select>
+
+        </section>
+
+
+        <!-- =====================================================
+         BOOKINGS
+    ====================================================== -->
+
+        <section class="card section-card">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Customer Bookings
+                    </h2>
+
+                    <p class="muted" style="margin:5px 0 0;">
+                        View customer booking details and manage booking status.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- TABLE -->
+
+            <div class="table-wrap">
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Customer</th>
+                            <th>Event</th>
+                            <th>Qty</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="bookingRows">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div id="adminBookingPagination" class="admin-pagination">
+
+                <button id="bookingPrevBtn" class="table-btn" type="button" onclick="previousAdminBookingPage()">
+                    Previous
+                </button>
+
+
+                <span id="bookingPageInfo">
+                    Page 1 of 1
+                </span>
+
+
+                <button id="bookingNextBtn" class="table-btn" type="button" onclick="nextAdminBookingPage()">
+                    Next
+                </button>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+    <!-- =====================================================
+       VIEW BOOKING DIALOG
+     ====================================================== -->
+
+    <dialog id="viewBookingDialog" class="dialog">
+
+        <div class="dialog-card">
+
+            <button type="button" class="dialog-close" onclick="closeViewBooking()">
+                ×
+            </button>
+
+
+            <p class="eyebrow">
+                BOOKING DETAILS
+            </p>
+
+            <h2>
+                View Booking
+            </h2>
+
+            <div class="field">
+
+                <label>
+                    Booking ID
+                </label>
+
+                <input id="viewBookingId" disabled />
+
+            </div>
+
+            <div class="field">
+
+                <label>
+                    Customer
+                </label>
+
+                <input id="viewBookingCustomer" disabled />
+
+            </div>
+
+            <div class="field">
+
+                <label>
+                    Event
+                </label>
+
+                <input id="viewBookingEvent" disabled />
+
+            </div>
+
+            <div class="field">
+
+                <label>
+                    Quantity
+                </label>
+
+                <input id="viewBookingQuantity" disabled />
+
+            </div>
+
+            <div class="field">
+
+                <label>
+                    Total Price
+                </label>
+
+                <input id="viewBookingTotal" disabled />
+
+            </div>
+
+            <div class="field">
+
+                <label>
+                    Status
+                </label>
+
+                <input id="viewBookingStatus" disabled />
+
+            </div>
+
+            <div class="field">
+
+                <label>
+                    Booking Date
+                </label>
+
+                <input id="viewBookingDate" disabled />
+
+            </div>
+
+            <!-- RIGHT SIDE -->
+
+            <div class="booking-dialog-actions">
+
+                <button type="button" class="btn btn-secondary" onclick="closeViewBooking()">
+                    Close
+                </button>
+
+            </div>
+
+        </div>
+
+    </dialog>
+
+    <!-- =====================================================
+       EDIT BOOKING DIALOG
+     ====================================================== -->
+
+    <dialog id="editBookingDialog" class="dialog">
+
+        <div class="dialog-card">
+
+            <button type="button" class="dialog-close" onclick="closeEditBooking()">
+                ×
+            </button>
+
+            <p class="eyebrow">
+                MANAGE BOOKING
+            </p>
+
+            <h2>
+                Update Booking Status
+            </h2>
+
+            <input id="editBookingId" type="hidden" />
+
+            <!-- CUSTOMER -->
+
+            <div class="field">
+
+                <label>
+                    Customer
+                </label>
+
+                <input id="editBookingCustomer" disabled />
+
+            </div>
+
+            <!-- EVENT -->
+
+            <div class="field">
+
+                <label>
+                    Event
+                </label>
+
+                <input id="editBookingEvent" disabled />
+
+            </div>
+
+            <!-- CURRENT STATUS -->
+
+            <div class="field">
+
+                <label>
+                    Current Status
+                </label>
+
+                <input id="editBookingCurrentStatus" disabled />
+
+            </div>
+
+            <!-- NEW STATUS -->
+
+            <div class="field">
+
+                <label for="editBookingStatus">
+                    New Status
+                </label>
+
+                <select id="editBookingStatus" required>
+
+                    <option value="PENDING">
+                        Pending
+                    </option>
+
+                    <option value="CONFIRMED">
+                        Confirmed
+                    </option>
+
+                    <option value="CANCELLED">
+                        Cancelled
+                    </option>
+
+                </select>
+
+            </div>
+
+            <!-- RIGHT SIDE BUTTONS -->
+
+            <div class="booking-dialog-actions">
+
+                <button type="button" class="btn btn-secondary" onclick="closeEditBooking()">
+                    Cancel
+                </button>
+
+
+                <button id="saveBookingStatusBtn" type="button" class="btn" onclick="updateBookingStatus()">
+                    Save Changes
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </dialog>
+
+
+    <!-- =====================================================
+       JAVASCRIPT
+     ====================================================== -->
+
+    <script src="../js/common.js"></script>
+
+    <script src="../js/api.js"></script>
+
+    <script src="../js/auth.js"></script>
+
+    <script src="admin.js?v=8"></script>
+
+    <script>
+        initBookingsPage()
+    </script>
+
+</body>
+
+</html>

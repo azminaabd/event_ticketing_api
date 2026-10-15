@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Admin Dashboard | Eventra</title>
+
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+
+<body class="app-body">
+
+  <!-- =========================
+       SIDEBAR
+  ========================== -->
+
+  <aside class="sidebar">
+
+    <a class="sidebar-logo" href="dashboard.html">
+      Eventra
+    </a>
+
+    <p class="sidebar-role">
+      Administrator
+    </p>
+
+    <nav>
+
+      <a class="active" href="dashboard.html">
+        Dashboard
+      </a>
+
+      <a href="users.html">
+        Manage Users
+      </a>
+
+      <a href="venues.html">
+        Manage Venues
+      </a>
+
+      <a href="bookings.html">
+        Manage Bookings
+      </a>
+
+    </nav>
+
+    <button class="sidebar-logout" onclick="logoutAndGo()">
+      Sign out
+    </button>
+
+  </aside>
+
+  <!-- =========================
+       MAIN CONTENT
+  ========================== -->
+
+  <main class="content">
+
+
+    <!-- TOP BAR -->
+
+    <header class="topbar">
+
+      <div>
+
+        <p class="eyebrow">
+          ADMINISTRATOR
+        </p>
+
+        <h1>
+          Dashboard
+        </h1>
+
+      </div>
+
+
+      <div class="user-chip">
+
+        <b data-user-name></b>
+
+        <span data-user-role></span>
+
+      </div>
+
+    </header>
+
+    <!-- =========================
+         STATISTICS
+    ========================== -->
+
+    <section class="stats-grid">
+
+
+      <!-- USERS -->
+
+      <div class="stat-card">
+
+        <span>
+          Total Users
+        </span>
+
+        <strong id="statUsers">
+          —
+        </strong>
+
+      </div>
+
+      <!-- EVENTS -->
+
+      <div class="stat-card">
+
+        <span>
+          Total Events
+        </span>
+
+        <strong id="statEvents">
+          —
+        </strong>
+
+      </div>
+
+      <!-- VENUES -->
+
+      <div class="stat-card">
+
+        <span>
+          Total Venues
+        </span>
+
+        <strong id="statVenues">
+          —
+        </strong>
+
+      </div>
+
+      <!-- BOOKINGS -->
+
+      <div class="stat-card">
+
+        <span>
+          Total Bookings
+        </span>
+
+        <strong id="statBookings">
+          —
+        </strong>
+
+      </div>
+
+    </section>
+
+    <!-- =========================
+         RECENT EVENTS
+    ========================== -->
+
+    <section class="card section-card">
+
+
+      <div class="section-heading">
+
+        <div>
+
+          <h2>
+            Recent Events
+          </h2>
+
+          <p class="muted" style="margin-bottom: 0;">
+            Overview of the latest events in the system.
+          </p>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="table-wrap">
+
+        <table>
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Date</th>
+              <th>Tickets</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody id="recentEvents">
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
+  <script src="../js/common.js"></script>
+
+  <script src="../js/api.js"></script>
+
+  <script src="../js/auth.js"></script>
+
+  <script src="admin.js?v=5"></script>
+
+  <script>
+    initAdminDashboard()
+  </script>
+
+</body>
+
+</html>

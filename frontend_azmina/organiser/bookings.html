@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    Event Bookings | Eventra
+  </title>
+
+  <link rel="stylesheet" href="../css/style.css" />
+
+</head>
+
+<body class="app-body">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <a class="sidebar-logo" href="dashboard.html">
+      Eventra
+    </a>
+
+    <p class="sidebar-role">
+      Organiser
+    </p>
+    <nav>
+      <a href="dashboard.html">
+        Dashboard
+      </a>
+      <a href="events.html">
+        Manage Events
+      </a>
+      <a class="active" href="bookings.html">
+        Event Bookings
+      </a>
+    </nav>
+
+    <button class="sidebar-logout" onclick="logoutAndGo()">
+      Sign out
+    </button>
+
+  </aside>
+
+  <!-- MAIN CONTENT -->
+
+  <main class="content">
+
+    <header class="topbar">
+
+      <div>
+
+        <p class="eyebrow">
+          ORGANISER
+        </p>
+
+        <h1>
+          Event Bookings
+        </h1>
+
+      </div>
+
+      <div class="user-chip">
+
+        <b data-user-name></b>
+
+        <span data-user-role></span>
+
+      </div>
+    </header>
+
+    <!-- SEARCH + FILTER -->
+
+    <section class="toolbar">
+
+      <input id="bookingSearch" type="search" placeholder="Search booking, event or customer..." />
+
+      <select id="bookingStatusFilter">
+
+        <option value="">
+          All Statuses
+        </option>
+
+        <option value="PENDING">
+          Pending
+        </option>
+
+        <option value="CONFIRMED">
+          Confirmed
+        </option>
+
+        <option value="CANCELLED">
+          Cancelled
+        </option>
+
+      </select>
+
+    </section>
+
+    <!-- BOOKING TABLE -->
+
+    <section class="card section-card">
+
+      <div class="section-heading">
+        <div>
+
+          <h2>
+            Bookings for My Events
+          </h2>
+
+          <p class="muted" style="margin: 5px 0 0;">
+            View booking records made for events under your organiser account.
+          </p>
+
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Booking</th>
+              <th>Event</th>
+              <th>Customer</th>
+              <th>Quantity</th>
+              <th>Total</th>
+              <th>Status</th>
+              <th>Date</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <tbody id="organiserBookingRows">
+
+          </tbody>
+        </table>
+      </div>
+
+      <!-- PAGINATION -->
+
+      <div class="booking-pagination" id="bookingPagination">
+
+        <button id="bookingPrevBtn" type="button" class="table-btn" onclick="previousBookingPage()">
+          Previous
+        </button>
+
+        <span id="bookingPageInfo">
+          Page 1 of 1
+        </span>
+
+        <button id="bookingNextBtn" type="button" class="table-btn" onclick="nextBookingPage()">
+          Next
+        </button>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- =====================================================
+       VIEW BOOKING
+  ====================================================== -->
+  <dialog id="organiserBookingDialog" class="dialog">
+
+    <div class="dialog-card">
+
+      <button type="button" class="dialog-close" onclick="closeOrganiserBooking()">
+        ×
+      </button>
+
+      <p class="eyebrow">
+        BOOKING DETAILS
+      </p>
+
+      <h2>
+        View Booking
+      </h2>
+
+      <div class="field">
+
+        <label>
+          Booking ID
+        </label>
+
+        <input id="orgViewBookingId" type="text" disabled />
+
+      </div>
+
+      <div class="field">
+
+        <label>
+          Event
+        </label>
+
+        <input id="orgViewEvent" type="text" disabled />
+
+      </div>
+
+      <div class="field">
+
+        <label>
+          Customer
+        </label>
+
+        <input id="orgViewCustomer" type="text" disabled />
+
+      </div>
+
+      <div class="field">
+
+        <label>
+          Quantity
+        </label>
+
+        <input id="orgViewQuantity" type="text" disabled />
+
+      </div>
+
+      <div class="field">
+
+        <label>
+          Total Price
+        </label>
+
+        <input id="orgViewTotal" type="text" disabled />
+
+      </div>
+
+      <div class="field">
+
+        <label>
+          Status
+        </label>
+
+        <input id="orgViewStatus" type="text" disabled />
+
+      </div>
+
+      <div class="field">
+
+        <label>
+          Booking Date
+        </label>
+
+        <input id="orgViewDate" type="text" disabled />
+
+      </div>
+
+      <div class="form-actions">
+
+        <button type="button" class="btn btn-secondary" onclick="closeOrganiserBooking()">
+          Close
+        </button>
+
+      </div>
+
+    </div>
+
+  </dialog>
+
+  <!-- JAVASCRIPT -->
+
+  <script src="../js/common.js"></script>
+
+  <script src="../js/api.js"></script>
+
+  <script src="../js/auth.js"></script>
+
+  <script src="organiser.js?v=8"></script>
+
+  <script>
+    initOrganiserBookings()
+  </script>
+
+</body>
+
+</html>

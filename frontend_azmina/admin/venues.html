@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    Manage Venues | Eventra
+  </title>
+
+  <link rel="stylesheet" href="../css/style.css?v=7" />
+
+</head>
+
+
+<body class="app-body">
+
+
+  <!-- SIDEBAR -->
+
+  <aside class="sidebar">
+
+    <a class="sidebar-logo" href="dashboard.html">
+      Eventra
+    </a>
+
+    <p class="sidebar-role">
+      Administrator
+    </p>
+
+
+    <nav>
+
+      <a href="dashboard.html">
+        Dashboard
+      </a>
+
+      <a href="users.html">
+        Manage Users
+      </a>
+
+      <a class="active" href="venues.html">
+        Manage Venues
+      </a>
+
+      <a href="bookings.html">
+        Manage Bookings
+      </a>
+
+    </nav>
+
+
+    <button class="sidebar-logout" onclick="logoutAndGo()">
+      Sign out
+    </button>
+
+  </aside>
+
+  <!-- MAIN CONTENT -->
+
+  <main class="content">
+
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+      <div>
+
+        <p class="eyebrow">
+          ADMINISTRATOR
+        </p>
+
+        <h1>
+          Manage Venues
+        </h1>
+
+      </div>
+
+      <div class="user-chip">
+
+        <b data-user-name></b>
+
+        <span data-user-role></span>
+
+      </div>
+
+    </header>
+
+    <!-- =====================================================
+         CREATE / UPDATE VENUE
+    ====================================================== -->
+
+    <section class="card form-card">
+
+
+      <div class="section-heading">
+
+        <div>
+
+          <h2 id="venueFormTitle">
+            Create New Venue
+          </h2>
+
+          <p id="venueFormDescription" class="muted" style="margin:5px 0 0;">
+            Add a new venue to the system.
+          </p>
+
+        </div>
+
+      </div>
+
+      <form id="venueForm" class="form-grid">
+
+        <!-- hidden ID -->
+
+        <input type="hidden" id="venueId" />
+
+        <!-- VENUE NAME -->
+
+        <div class="field">
+
+          <label for="venueName">
+            Venue Name
+          </label>
+
+          <input id="venueName" type="text" required />
+
+        </div>
+
+        <!-- LOCATION -->
+
+        <div class="field">
+
+          <label for="venueLocation">
+            Location
+          </label>
+
+          <input id="venueLocation" type="text" required />
+
+        </div>
+
+        <!-- CAPACITY -->
+
+        <div class="field">
+
+          <label for="venueCapacity">
+            Capacity
+          </label>
+
+          <input id="venueCapacity" type="number" min="1" required />
+
+        </div>
+
+        <!-- STATUS -->
+
+        <div class="field">
+
+          <label for="venueStatus">
+            Status
+          </label>
+
+          <select id="venueStatus" required>
+
+            <option value="ACTIVE">
+              ACTIVE
+            </option>
+
+            <option value="INACTIVE">
+              INACTIVE
+            </option>
+
+          </select>
+
+        </div>
+
+        <!-- BUTTONS -->
+
+        <div class="form-actions span-2" style="justify-content:flex-end;">
+
+          <button id="venueSubmitBtn" class="btn btn-fit" type="submit">
+            Create Venue
+          </button>
+
+          <button id="venueClearBtn" class="btn btn-secondary btn-fit" type="button" onclick="resetVenueForm()">
+            Clear
+          </button>
+
+        </div>
+
+      </form>
+
+    </section>
+
+    <!-- =====================================================
+         VENUE LIST
+    ====================================================== -->
+
+    <section class="card section-card">
+
+      <div class="section-heading">
+
+        <h2>
+          Venues
+        </h2>
+
+      </div>
+
+      <div class="table-wrap">
+
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Venue</th>
+              <th>Location</th>
+              <th>Capacity</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody id="venueRows"></tbody>
+
+        </table>
+
+      </div>
+
+      <!-- PAGINATION -->
+
+      <div class="admin-pagination">
+
+        <button id="venuePrevBtn" class="table-btn" type="button" onclick="previousVenuePage()">
+          Previous
+        </button>
+
+        <span id="venuePageInfo">
+          Page 1 of 1
+        </span>
+
+        <button id="venueNextBtn" class="table-btn" type="button" onclick="nextVenuePage()">
+          Next
+        </button>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- JAVASCRIPT -->
+
+  <script src="../js/common.js"></script>
+
+  <script src="../js/api.js"></script>
+
+  <script src="../js/auth.js"></script>
+
+  <script src="admin.js?v=7"></script>
+
+  <script>
+    initVenuesPage()
+  </script>
+
+</body>
+
+</html>

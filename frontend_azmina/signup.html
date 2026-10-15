@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Sign up | Eventra</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="auth-bg">
+
+  <main class="auth-card">
+
+    <!-- LEFT SIDE -->
+    <section class="auth-left">
+
+      <div class="brand-row">
+        <a class="logo" href="index.html">Eventra</a>
+        <p class="brand-subtitle">
+          Event Ticketing & Venue Booking
+        </p>
+      </div>
+
+
+      <form id="signupForm" class="auth-form" novalidate>
+
+        <h1>Sign Up</h1>
+
+        <p class="auth-copy"> Create new Eventra account. </p>
+
+        <!-- FULL NAME -->
+        <div class="field">
+          <label for="name">Full name</label>
+
+          <div class="input-wrap">
+            <input id="name" type="text" autocomplete="name" placeholder="Full name" />
+          </div>
+
+          <p class="field-error"></p>
+        </div>
+
+
+        <!-- EMAIL -->
+        <div class="field">
+          <label for="email">Email address</label>
+
+          <div class="input-wrap">
+            <input id="email" type="email" autocomplete="email" placeholder="you@example.com" />
+          </div>
+
+          <p class="field-error"></p>
+        </div>
+
+
+        <!-- ROLE -->
+        <div class="field">
+
+          <label for="role">Register as</label>
+
+          <div class="input-wrap">
+            <select id="role">
+              <option value="">Select account role</option>
+
+              <option value="CUSTOMER">
+                Customer
+              </option>
+
+              <option value="ORGANISER">
+                Organiser
+              </option>
+            </select>
+          </div>
+
+          <p class="field-error"></p>
+
+        </div>
+
+
+        <!-- PASSWORD -->
+        <div class="field">
+
+          <label for="password">Password</label>
+
+          <div class="input-wrap">
+
+            <input id="password" type="password" autocomplete="new-password" placeholder="At least 8 characters" />
+
+            <button type="button" class="toggle-pw" onclick="togglePw(this)">
+              Show
+            </button>
+
+          </div>
+
+          <p class="field-error"></p>
+
+        </div>
+
+
+        <!-- CONFIRM PASSWORD -->
+        <div class="field">
+
+          <label for="confirm">
+            Confirm password
+          </label>
+
+          <div class="input-wrap">
+
+            <input id="confirm" type="password" autocomplete="new-password" placeholder="Repeat your password" />
+
+            <button type="button" class="toggle-pw" onclick="togglePw(this)">
+              Show
+            </button>
+
+          </div>
+
+          <p class="field-error"></p>
+
+        </div>
+
+
+        <!-- SUBMIT -->
+        <button id="submitBtn" class="btn" type="submit">
+          Create Account
+        </button>
+
+
+        <p class="alt-link">
+          Already registered?
+          <a href="index.html">Sign In</a>
+        </p>
+
+      </form>
+
+    </section>
+
+    <!-- RIGHT SIDE -->
+    <section class="auth-right">
+
+      <div class="auth-art">
+
+        <span class="art-kicker">
+          YOUR NEXT EVENT
+        </span>
+
+        <h2>
+          Starts<br />
+          right here.
+        </h2>
+
+        <p>
+          Browse events, manage your account and experience
+          Eventra based on your selected role.
+        </p>
+
+      </div>
+
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+
+    </section>
+
+  </main>
+
+  <script src="js/common.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+
+  <script>
+
+    document
+      .getElementById('signupForm')
+      .addEventListener('submit', async event => {
+
+        event.preventDefault()
+
+        const get = id =>
+          document.getElementById(id)
+
+
+        /* ==========================
+           VALIDATION
+        ========================== */
+        const valid = [
+
+          setError(
+            get('name'),
+            get('name').value.trim().length >= 2
+              ? ''
+              : 'Enter your full name.'
+          ),
+
+
+          setError(
+            get('email'),
+            /^\S+@\S+\.\S+$/.test(
+              get('email').value.trim()
+            )
+              ? ''
+              : 'Enter a valid email address.'
+          ),
+
+          setError(
+            get('role'),
+            get('role').value
+              ? ''
+              : 'Select an account role.'
+          ),
+
+          setError(
+            get('password'),
+            get('password').value.length >= 8
+              ? ''
+              : 'Use at least 8 characters.'
+          ),
+
+          setError(
+            get('confirm'),
+            get('confirm').value ===
+              get('password').value
+              ? ''
+              : 'Passwords do not match.'
+          )
+
+        ].every(Boolean)
+
+        if (!valid) return
+
+
+        const button =
+          get('submitBtn')
+
+        setButtonLoading(
+          button,
+          true
+        )
+
+        try {
+
+          /* ==========================
+             REGISTER ACCOUNT
+          ========================== */
+          await apiFetch(
+            ENDPOINTS.register,
+            {
+              method: 'POST',
+
+              body: JSON.stringify({
+
+                name:
+                  get('name')
+                    .value
+                    .trim(),
+
+                email:
+                  get('email')
+                    .value
+                    .trim(),
+
+                password:
+                  get('password')
+                    .value,
+
+                role:
+                  get('role')
+                    .value
+
+              })
+            }
+          )
+
+          toast(
+            'Account created. You can sign in now.',
+            'success'
+          )
+
+          setTimeout(
+            () =>
+              location.href =
+              'index.html',
+            900
+          )
+
+        } finally {
+
+          setButtonLoading(
+            button,
+            false
+          )
+
+        }
+
+      })
+
+  </script>
+
+</body>
+
+</html>

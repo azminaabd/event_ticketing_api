@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    Manage Users | Eventra
+  </title>
+
+  <link rel="stylesheet" href="../css/style.css?v=11" />
+
+</head>
+
+<body class="app-body">
+
+  <!-- =====================================================
+       SIDEBAR
+  ====================================================== -->
+
+  <aside class="sidebar">
+
+    <a class="sidebar-logo" href="dashboard.html">
+      Eventra
+    </a>
+
+    <p class="sidebar-role">
+      Administrator
+    </p>
+
+
+    <nav>
+
+      <a href="dashboard.html">
+        Dashboard
+      </a>
+
+      <a class="active" href="users.html">
+        Manage Users
+      </a>
+
+      <a href="venues.html">
+        Manage Venues
+      </a>
+
+      <a href="bookings.html">
+        Manage Bookings
+      </a>
+
+    </nav>
+
+
+    <button class="sidebar-logout" type="button" onclick="logoutAndGo()">
+      Sign out
+    </button>
+
+  </aside>
+
+  <!-- =====================================================
+       MAIN CONTENT
+  ====================================================== -->
+
+  <main class="content">
+
+    <!-- TOP BAR -->
+
+    <header class="topbar">
+
+      <div>
+
+        <p class="eyebrow">
+          ADMINISTRATOR
+        </p>
+
+        <h1>
+          Manage Users
+        </h1>
+
+      </div>
+
+      <div class="user-chip">
+
+        <b data-user-name></b>
+
+        <span data-user-role></span>
+
+      </div>
+
+    </header>
+
+    <!-- =====================================================
+         CREATE USER
+    ====================================================== -->
+
+    <section class="card form-card">
+
+      <div class="section-heading">
+
+        <div>
+
+          <h2>
+            Create User Account
+          </h2>
+
+          <p class="muted" style="margin:5px 0 0;">
+            Create a new customer or organiser account.
+          </p>
+
+        </div>
+
+      </div>
+
+      <form id="userForm" class="form-grid">
+
+        <!-- NAME -->
+
+        <div class="field">
+
+          <label for="userName">
+            Name
+          </label>
+
+          <input id="userName" type="text" maxlength="100" required />
+
+        </div>
+
+        <!-- EMAIL -->
+
+        <div class="field">
+
+          <label for="userEmail">
+            Email
+          </label>
+
+          <input id="userEmail" type="email" maxlength="150" required />
+
+        </div>
+
+        <!-- ROLE -->
+
+        <div class="field">
+
+          <label for="userRole">
+            Role
+          </label>
+
+          <select id="userRole" required>
+
+            <option value="CUSTOMER">
+              Customer
+            </option>
+
+            <option value="ORGANISER">
+              Organiser
+            </option>
+
+          </select>
+
+        </div>
+
+        <!-- PASSWORD -->
+
+        <div class="field">
+
+          <label for="userPassword">
+            Password
+            <small>
+              (minimum 8 characters)
+            </small>
+
+          </label>
+
+          <input id="userPassword" type="password" minlength="8" maxlength="72" required />
+
+        </div>
+
+        <!-- FORM BUTTONS -->
+
+        <div class="form-actions span-2" style="
+            width:100%;
+            display:flex;
+            justify-content:flex-end;
+            align-items:center;
+            gap:10px;">
+
+          <button class="btn btn-fit" type="submit">
+            Create Account
+          </button>
+
+          <button class="btn btn-secondary btn-fit" type="button" onclick="resetUserForm()">
+            Clear
+          </button>
+
+        </div>
+
+      </form>
+
+    </section>
+
+
+    <!-- =====================================================
+         SYSTEM USERS
+    ====================================================== -->
+    <section class="card section-card">
+
+
+      <div class="section-heading">
+
+        <h2>
+          System Users
+        </h2>
+
+      </div>
+
+      <div class="table-wrap">
+
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Role</th>
+              <th>Created</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <tbody id="userRows"></tbody>
+
+        </table>
+
+      </div>
+
+      <!-- PAGINATION -->
+
+      <div class="admin-pagination">
+
+        <button id="userPrevBtn" class="table-btn" type="button" onclick="previousUserPage()">
+          Previous
+        </button>
+
+        <span id="userPageInfo">
+          Page 1 of 1
+        </span>
+
+        <button id="userNextBtn" class="table-btn" type="button" onclick="nextUserPage()">
+          Next
+        </button>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- =====================================================
+       VIEW USER DIALOG
+  ====================================================== -->
+
+  <dialog id="viewUserDialog" class="dialog">
+
+    <div class="dialog-card">
+
+      <button type="button" class="dialog-close" onclick="closeViewUser()">
+        ×
+      </button>
+
+      <p class="eyebrow">
+        USER DETAILS
+      </p>
+
+      <h2>
+        View User
+      </h2>
+
+      <!-- USER ID -->
+
+      <div class="field">
+
+        <label for="viewUserId">
+          User ID
+        </label>
+
+        <input id="viewUserId" type="text" disabled />
+
+      </div>
+
+      <!-- NAME -->
+
+      <div class="field">
+
+        <label for="viewUserName">
+          Name
+        </label>
+
+        <input id="viewUserName" type="text" disabled />
+
+      </div>
+
+      <!-- ROLE -->
+
+      <div class="field">
+
+        <label for="viewUserRole">
+          Role
+        </label>
+
+        <input id="viewUserRole" type="text" disabled />
+
+      </div>
+
+      <!-- CREATED -->
+
+      <div class="field">
+
+        <label for="viewUserCreated">
+          Created
+        </label>
+
+        <input id="viewUserCreated" type="text" disabled />
+
+      </div>
+
+      <!-- CLOSE BUTTON - RIGHT -->
+
+      <div style="
+          width:100%;
+          display:flex;
+          justify-content:flex-end;
+          align-items:center;
+          margin-top:18px;
+        ">
+
+        <button type="button" class="btn btn-secondary" style="
+            width:auto;
+            flex:0 0 auto;
+          " onclick="closeViewUser()">
+          Close
+        </button>
+
+      </div>
+
+    </div>
+
+  </dialog>
+
+  <!-- =====================================================
+       EDIT USER DIALOG
+  ====================================================== -->
+
+  <dialog id="editUserDialog" class="dialog">
+
+    <div class="dialog-card">
+
+      <button type="button" class="dialog-close" onclick="closeEditUser()">
+        ×
+      </button>
+
+      <p class="eyebrow">
+        EDIT USER
+      </p>
+      <h2>
+        Edit User Role
+      </h2>
+
+      <input id="editUserId" type="hidden" />
+
+      <!-- NAME -->
+
+      <div class="field">
+
+        <label for="editUserName">
+          Name
+        </label>
+
+        <input id="editUserName" type="text" disabled />
+
+      </div>
+
+      <!-- ROLE -->
+
+      <div class="field">
+
+        <label for="editUserRole">
+          Role
+        </label>
+
+        <select id="editUserRole">
+
+          <option value="CUSTOMER">
+            Customer
+          </option>
+
+          <option value="ORGANISER">
+            Organiser
+          </option>
+
+        </select>
+
+      </div>
+
+      <!-- BUTTONS - RIGHT -->
+
+      <div style="
+          width:100%;
+          display:flex;
+          justify-content:flex-end;
+          align-items:center;
+          gap:10px;
+          margin-top:18px;
+        ">
+
+        <button type="button" class="btn btn-secondary" style="
+            width:auto;
+            flex:0 0 auto;
+          " onclick="closeEditUser()">
+          Cancel
+        </button>
+
+        <button type="button" class="btn" style="
+            width:auto;
+            flex:0 0 auto;
+          " onclick="updateUserRole()">
+          Save Changes
+        </button>
+
+      </div>
+
+    </div>
+
+  </dialog>
+
+  <!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
+
+  <script src="../js/common.js"></script>
+
+  <script src="../js/api.js"></script>
+
+  <script src="../js/auth.js"></script>
+
+  <script src="admin.js?v=11"></script>
+
+  <script>
+    initUsersPage()
+  </script>
+
+</body>
+
+</html>

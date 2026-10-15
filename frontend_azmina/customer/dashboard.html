@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Customer Dashboard | Eventra</title>
+
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+
+<body class="customer-body">
+
+
+  <!-- CUSTOMER TOP NAVIGATION -->
+
+  <header class="customer-navbar">
+
+    <div class="customer-nav-inner">
+
+      <a class="customer-logo" href="dashboard.html">
+        Eventra
+      </a>
+
+
+      <nav class="customer-nav-links">
+
+        <a class="active" href="dashboard.html">
+          Home
+        </a>
+
+        <a href="events.html">
+          Browse Events
+        </a>
+
+        <a href="bookings.html">
+          My Bookings
+        </a>
+
+        <a href="profile.html">
+          My Profile
+        </a>
+
+      </nav>
+
+
+      <div class="customer-nav-user">
+
+        <div class="customer-user-info">
+          <strong data-user-name></strong>
+          <span data-user-role></span>
+        </div>
+
+        <button class="customer-signout" onclick="logoutAndGo()">
+          Sign out
+        </button>
+
+      </div>
+
+    </div>
+
+  </header>
+
+  <main class="customer-main">
+
+
+    <!-- HERO -->
+
+    <section class="customer-hero">
+
+      <div class="customer-hero-overlay"></div>
+
+
+      <div class="customer-hero-content">
+
+        <p class="hero-kicker">
+          EVENTRA
+        </p>
+
+        <h1>
+          Discover Your Next Event
+        </h1>
+
+        <p>
+          Find events, reserve tickets and enjoy.
+        </p>
+
+
+        <a class="hero-button" href="events.html">
+          Browse Events
+        </a>
+
+      </div>
+
+    </section>
+
+    <!-- BOOKING SUMMARY -->
+
+    <section class="customer-section">
+
+      <div class="customer-section-heading">
+
+        <div>
+          <p class="eyebrow">
+            OVERVIEW
+          </p>
+
+          <h2>
+            My Event Summary
+          </h2>
+        </div>
+
+      </div>
+
+      <div class="customer-stat-grid">
+
+        <article class="customer-stat-card">
+
+          <span>
+            Available Events
+          </span>
+
+          <strong id="statAvailable">
+            —
+          </strong>
+
+        </article>
+
+        <article class="customer-stat-card">
+
+          <span>
+            My Bookings
+          </span>
+
+          <strong id="statMine">
+            —
+          </strong>
+
+        </article>
+
+        <article class="customer-stat-card">
+
+          <span>
+            Confirmed
+          </span>
+
+          <strong id="statConfirmed">
+            —
+          </strong>
+
+        </article>
+
+        <article class="customer-stat-card">
+
+          <span>
+            Total Spent
+          </span>
+
+          <strong id="statSpent">
+            —
+          </strong>
+
+        </article>
+
+      </div>
+
+    </section>
+
+    <!-- UPCOMING EVENTS -->
+
+    <section class="customer-section">
+
+      <div class="customer-section-heading">
+
+        <div>
+
+          <p class="eyebrow">
+            UPCOMING
+          </p>
+
+          <h2>
+            Upcoming Events
+          </h2>
+
+        </div>
+
+
+        <a class="section-link" href="events.html">
+          View All Events
+        </a>
+
+      </div>
+
+      <div id="dashboardEventCards" class="event-grid"></div>
+
+    </section>
+
+
+  </main>
+
+  <script src="../js/common.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+
+  <script src="customer.js?v=15"></script>
+
+  <script>
+    initCustomerDashboard()
+  </script>
+
+</body>
+
+</html>

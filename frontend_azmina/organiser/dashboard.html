@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Organiser Dashboard | Eventra</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+
+<body class="app-body">
+  <aside class="sidebar">
+    <a class="sidebar-logo" href="dashboard.html">Eventra</a>
+    <p class="sidebar-role">Organiser</p>
+    <nav>
+      <a class="active" href="dashboard.html">Dashboard</a><a href="events.html">Manage Events</a><a
+        href="bookings.html">Event Bookings</a>
+    </nav>
+    <button class="sidebar-logout" onclick="logoutAndGo()">Sign out</button>
+  </aside>
+  <main class="content">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">ORGANISER</p>
+        <h1>Dashboard</h1>
+      </div>
+      <div class="user-chip">
+        <b data-user-name></b><span data-user-role></span>
+      </div>
+    </header>
+    <section class="stats-grid">
+      <div class="stat-card">
+        <span>My Events</span><strong id="statMyEvents">0</strong>
+      </div>
+      <div class="stat-card">
+        <span>Active Events</span><strong id="statActive">0</strong>
+      </div>
+      <div class="stat-card">
+        <span>Tickets Offered</span><strong id="statTickets">0</strong>
+      </div>
+      <div class="stat-card">
+        <span>Bookings</span><strong id="statBookings">—</strong>
+      </div>
+    </section>
+    <section class="card section-card">
+      <div class="section-heading">
+        <h2>My Upcoming Events</h2>
+        <a class="btn btn-fit" href="events.html">Manage Events</a>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Date</th>
+              <th>Venue</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="myEventRows"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <script src="../js/common.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="organiser.js"></script>
+  <script>
+    initOrganiserDashboard()
+  </script>
+</body>
+
+</html>

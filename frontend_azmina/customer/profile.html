@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    My Profile | Eventra
+  </title>
+
+  <link rel="stylesheet" href="../css/style.css?v=16" />
+
+</head>
+
+<body class="customer-body">
+
+  <!-- =====================================================
+       TOP NAVIGATION
+  ====================================================== -->
+  <header class="customer-navbar">
+
+    <div class="customer-nav-inner">
+
+      <a class="customer-logo" href="dashboard.html">
+        Eventra
+      </a>
+
+      <nav class="customer-nav-links">
+
+        <a href="dashboard.html">
+          Home
+        </a>
+
+        <a href="events.html">
+          Browse Events
+        </a>
+
+        <a href="bookings.html">
+          My Bookings
+        </a>
+
+        <a class="active" href="profile.html">
+          My Profile
+        </a>
+
+      </nav>
+
+      <div class="customer-nav-user">
+
+        <div class="customer-user-info">
+
+          <strong data-user-name></strong>
+
+          <span data-user-role></span>
+
+        </div>
+
+        <button class="customer-signout" type="button" onclick="logoutAndGo()">
+          Sign out
+        </button>
+
+      </div>
+
+    </div>
+
+  </header>
+
+  <!-- =====================================================
+       MAIN CONTENT
+  ====================================================== -->
+  <main class="customer-main">
+
+    <!-- PAGE HEADING -->
+
+    <section class="customer-page-heading">
+
+      <p class="eyebrow">
+        CUSTOMER
+      </p>
+
+      <h1>
+        My Profile
+      </h1>
+
+      <p>
+        Manage your personal account information.
+      </p>
+
+    </section>
+
+    <!-- =====================================================
+         PROFILE LAYOUT
+    ====================================================== -->
+
+    <div class="customer-profile-layout">
+
+      <aside class="card customer-account-card">
+
+
+        <p class="eyebrow">
+          ACCOUNT OVERVIEW
+        </p>
+
+        <div class="profile-avatar">
+
+          <span id="profileAvatarInitial">
+            U
+          </span>
+
+        </div>
+
+        <!-- NAME -->
+
+        <h2 id="profileOverviewName" class="profile-overview-name">
+          User
+        </h2>
+
+        <!-- ROLE -->
+
+        <span id="profileOverviewRole" class="profile-role-badge">
+          CUSTOMER
+        </span>
+
+        <!-- ACCOUNT DETAILS -->
+
+        <div class="profile-overview-details">
+
+
+          <div class="profile-overview-item">
+
+            <span>
+              Email
+            </span>
+
+            <strong id="profileOverviewEmail">
+              —
+            </strong>
+
+          </div>
+
+          <div class="profile-overview-item">
+
+            <span>
+              Member Since
+            </span>
+
+            <strong id="profileOverviewCreated">
+              —
+            </strong>
+
+          </div>
+
+        </div>
+
+        <!-- ACCOUNT SECURITY -->
+
+        <div class="profile-security-box">
+
+          <h3>
+            Account Security
+          </h3>
+
+          <div class="profile-security-item">
+
+            <span class="profile-security-icon">
+              ✓
+            </span>
+
+            <div>
+
+              <strong>
+                Password Protected
+              </strong>
+
+              <p>
+                Your account requires a password to sign in.
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="profile-security-item">
+
+            <span class="profile-security-icon">
+              ✓
+            </span>
+
+            <div>
+
+              <strong>
+                Secure Password
+              </strong>
+
+              <p>
+                Use at least 8 characters when changing your password.
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="profile-security-item">
+
+            <span class="profile-security-icon">
+              ✓
+            </span>
+
+            <div>
+
+              <strong>
+                Keep Details Updated
+              </strong>
+
+              <p>
+                Make sure your name and email remain accurate.
+              </p>
+
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ===================================================
+           RIGHT - PROFILE INFORMATION
+      ==================================================== -->
+      <section class="card customer-card customer-profile-form-card">
+        <div class="section-heading">
+          <div>
+            <h2>
+              Profile Information
+            </h2>
+
+            <p class="muted" style="margin:5px 0 0;">
+              View and update your personal information.
+            </p>
+          </div>
+        </div>
+
+        <form id="profileForm" class="form-grid">
+
+          <!-- FULL NAME -->
+          <div class="field">
+
+            <label for="profileName">
+              Full Name
+            </label>
+
+            <input id="profileName" type="text" maxlength="100" disabled required />
+
+          </div>
+
+          <!-- EMAIL -->
+
+          <div class="field">
+
+            <label for="profileEmail">
+              Email
+            </label>
+
+            <input id="profileEmail" type="email" maxlength="150" disabled required />
+
+          </div>
+
+          <!-- ROLE -->
+
+          <div class="field span-2">
+
+            <label for="profileRole">
+              Role
+            </label>
+
+            <input id="profileRole" type="text" disabled />
+
+          </div>
+
+          <!-- =================================================
+               PASSWORD SECTION
+          ================================================== -->
+          <div id="passwordSection" class="span-2" hidden>
+
+            <div class="profile-divider"></div>
+
+            <div class="section-heading profile-password-heading">
+
+              <div>
+
+                <h2>
+                  Change Password
+                </h2>
+
+                <p class="muted" style="margin:5px 0 0;">
+                  Leave these fields empty if you do not want to change your password.
+                </p>
+
+              </div>
+
+            </div>
+
+            <div class="form-grid">
+
+              <!-- CURRENT PASSWORD -->
+
+              <div class="field">
+
+                <label for="currentPassword">
+                  Current Password
+                </label>
+
+                <input id="currentPassword" type="password" autocomplete="current-password"
+                  placeholder="Enter current password" />
+
+              </div>
+
+              <!-- NEW PASSWORD -->
+
+              <div class="field">
+
+                <label for="newPassword">
+
+                  New Password
+
+                  <small>
+                    (minimum 8 characters)
+                  </small>
+
+                </label>
+
+                <input id="newPassword" type="password" autocomplete="new-password" placeholder="Enter new password" />
+
+              </div>
+
+              <!-- CONFIRM NEW PASSWORD -->
+              <div class="field span-2">
+
+                <label for="confirmNewPassword">
+                  Confirm New Password
+                </label>
+
+                <input id="confirmNewPassword" type="password" autocomplete="new-password"
+                  placeholder="Repeat new password" />
+
+              </div>
+
+
+            </div>
+
+          </div>
+
+          <!-- =================================================
+               BUTTONS
+          ================================================== -->
+          <div class="form-actions span-2 customer-profile-actions">
+
+            <button id="editProfileBtn" type="button" class="btn" onclick="editCustomerProfile()">
+              Edit Profile
+            </button>
+
+            <button id="cancelProfileBtn" type="button" class="btn btn-secondary" onclick="cancelCustomerProfileEdit()"
+              hidden>
+              Cancel
+            </button>
+
+            <button id="saveProfileBtn" type="submit" class="btn" hidden>
+              Save Changes
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
+
+  <script src="../js/common.js"></script>
+
+  <script src="../js/api.js"></script>
+
+  <script src="../js/auth.js"></script>
+
+  <script src="customer.js?v=16"></script>
+
+  <script>
+    initCustomerProfile()
+  </script>
+
+</body>
+
+</html>

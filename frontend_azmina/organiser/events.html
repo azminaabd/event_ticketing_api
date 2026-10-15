@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    Manage Events | Eventra
+  </title>
+
+  <link rel="stylesheet" href="../css/style.css?v=7" />
+
+</head>
+
+<body class="app-body">
+
+  <!-- =====================================================
+       SIDEBAR
+  ====================================================== -->
+  <aside class="sidebar">
+
+    <a class="sidebar-logo" href="dashboard.html">
+      Eventra
+    </a>
+
+    <p class="sidebar-role">
+      Organiser
+    </p>
+
+    <nav>
+
+      <a href="dashboard.html">
+        Dashboard
+      </a>
+
+      <a class="active" href="events.html">
+        Manage Events
+      </a>
+
+      <a href="bookings.html">
+        Event Bookings
+      </a>
+
+    </nav>
+
+    <button class="sidebar-logout" type="button" onclick="logoutAndGo()">
+      Sign out
+    </button>
+
+  </aside>
+
+  <main class="content">
+
+    <!-- ===================================================
+         TOPBAR
+    ==================================================== -->
+    <header class="topbar">
+
+      <div>
+
+        <p class="eyebrow">
+          ORGANISER
+        </p>
+
+        <h1>
+          Manage Events
+        </h1>
+
+      </div>
+
+      <div class="user-chip">
+
+        <b data-user-name></b>
+
+        <span data-user-role></span>
+
+      </div>
+
+    </header>
+
+    <!-- =====================================================
+         CREATE / EDIT EVENT
+    ====================================================== -->
+    <section class="card form-card">
+
+      <p id="eventFormMessage" class="muted">
+        Create and manage your own events using the form below.
+      </p>
+
+      <form id="eventForm" class="form-grid event-form">
+
+        <!-- EVENT ID -->
+        <input type="hidden" id="eventId" />
+
+
+
+        <!-- EVENT NAME -->
+        <div class="field span-2">
+
+          <label for="eventName">
+            Event name
+          </label>
+
+          <input id="eventName" type="text" maxlength="150" required />
+
+        </div>
+
+        <!-- VENUE -->
+        <div class="field">
+
+          <label for="eventVenue">
+            Venue
+          </label>
+
+          <select id="eventVenue" required>
+
+            <option value="">
+              Select venue
+            </option>
+
+          </select>
+
+        </div>
+
+        <!-- EVENT DATE -->
+        <div class="field">
+
+          <label for="eventDate">
+            Date
+          </label>
+
+          <input id="eventDate" type="date" required />
+
+        </div>
+
+
+        <!-- START TIME -->
+        <div class="field">
+
+          <label for="startTime">
+            Start time
+          </label>
+
+          <input id="startTime" type="time" required />
+
+        </div>
+
+        <!-- END TIME -->
+        <div class="field">
+
+          <label for="endTime">
+            End time
+          </label>
+
+          <input id="endTime" type="time" required />
+
+        </div>
+
+        <!-- TICKET PRICE -->
+        <div class="field">
+
+          <label for="ticketPrice">
+            Ticket price (RM)
+          </label>
+
+          <input id="ticketPrice" type="number" min="0" step="0.01" required />
+
+        </div>
+
+        <!-- TICKET QUANTITY -->
+        <div class="field">
+
+          <label for="ticketQuantity">
+            Ticket quantity
+          </label>
+
+          <input id="ticketQuantity" type="number" min="1" step="1" required />
+
+        </div>
+
+        <!-- STATUS -->
+        <div class="field">
+
+          <label for="eventStatus">
+            Status
+          </label>
+
+          <select id="eventStatus" required>
+
+            <option value="ACTIVE">
+              ACTIVE
+            </option>
+
+            <option value="CANCELLED">
+              CANCELLED
+            </option>
+
+            <option value="COMPLETED">
+              COMPLETED
+            </option>
+
+          </select>
+
+        </div>
+
+        <!-- DESCRIPTION -->
+        <div class="field span-2">
+
+          <label for="eventDescription">
+            Description
+          </label>
+
+          <textarea id="eventDescription" rows="3" maxlength="1000"></textarea>
+
+        </div>
+
+        <!-- FORM ACTION -->
+        <div class="form-actions span-2" style="justify-content:flex-end;">
+
+          <button id="eventSubmitBtn" class="btn btn-fit" type="submit">
+            Create Event
+          </button>
+
+          <button class="btn btn-secondary btn-fit" type="button" onclick="resetEventForm()">
+            Clear
+          </button>
+
+        </div>
+
+      </form>
+
+    </section>
+
+    <!-- =====================================================
+         MY EVENTS
+    ====================================================== -->
+    <section class="card section-card">
+
+      <!-- SECTION HEADING -->
+      <div class="section-heading">
+
+        <div>
+
+          <h2>
+            My Events
+          </h2>
+
+          <p class="muted" style="margin:5px 0 0;">
+            View and manage events created under your organiser account.
+          </p>
+
+        </div>
+
+      </div>
+
+      <!-- TABLE -->
+      <div class="table-wrap">
+
+        <table>
+
+          <thead>
+
+            <tr>
+              <th>Event</th>
+              <th>Venue</th>
+              <th>Date</th>
+              <th>Price</th>
+              <th>Tickets</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+
+          </thead>
+
+          <tbody id="eventRows">
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+      <!-- ===================================================
+           EVENT PAGINATION
+      ==================================================== -->
+      <div id="eventPagination" class="organiser-pagination">
+
+        <button id="eventPrevBtn" class="table-btn" type="button" onclick="previousEventPage()">
+          Previous
+        </button>
+
+        <span id="eventPageInfo">
+          Page 1 of 1
+        </span>
+
+        <button id="eventNextBtn" class="table-btn" type="button" onclick="nextEventPage()">
+          Next
+        </button>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
+  <script src="../js/common.js"></script>
+
+  <script src="../js/api.js"></script>
+
+  <script src="../js/auth.js"></script>
+
+  <script src="organiser.js?v=7"></script>
+
+  <script>
+    initEventsPage()
+  </script>
+
+</body>
+
+</html>
