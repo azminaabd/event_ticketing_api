@@ -1,0 +1,1890 @@
+{
+  "info": {
+    "_postman_id": "ce50a4e4-d5cf-429c-83d8-94d9d9cf8afc",
+    "name": "Event Ticketing and Venue Booking API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "58068423",
+    "_collection_link": "https://go.postman.co/collection/58068423-ce50a4e4-d5cf-429c-83d8-94d9d9cf8afc?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Member 2 - Events & Venues API",
+      "item": [
+        {
+          "name": "Events",
+          "item": [
+            {
+              "name": "GET All Events",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost/event_ticketing_api/events",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "path": [
+                    "event_ticketing_api",
+                    "events"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GET Event by ID",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost/event_ticketing_api/events/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "path": [
+                    "event_ticketing_api",
+                    "events",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "POST Create Event",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"organiser_id\": 2,\r\n    \"venue_id\": 5,\r\n    \"event_name\": \"Cybersecurity Seminar Test\",\r\n    \"description\": \"Cybersecurity awareness seminar test\",\r\n    \"event_date\": \"2026-12-10\",\r\n    \"start_time\": \"10:00:00\",\r\n    \"end_time\": \"15:00:00\",\r\n    \"ticket_price\": 40.00,\r\n    \"ticket_quantity\": 300,\r\n    \"status\": \"ACTIVE\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost/event_ticketing_api/events",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "path": [
+                    "event_ticketing_api",
+                    "events"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "PUT Update Event",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"organiser_id\": 3,\r\n    \"venue_id\": 4,\r\n    \"event_name\": \"Business Workshop\",\r\n    \"description\": \"Workshop for young entrepreneurs.\",\r\n    \"event_date\": \"2026-12-01\",\r\n    \"start_time\": \"09:00:00\",\r\n    \"end_time\": \"13:00:00\",\r\n    \"ticket_price\": 30.00,\r\n    \"ticket_quantity\": 200,\r\n    \"status\": \"ACTIVE\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost/event_ticketing_api/events/6",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "path": [
+                    "event_ticketing_api",
+                    "events",
+                    "6"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DELETE Event",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost/event_ticketing_api/events/6",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "path": [
+                    "event_ticketing_api",
+                    "events",
+                    "6"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Error 404 - Event Not Found",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost/event_ticketing_api/events/9999",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "path": [
+                    "event_ticketing_api",
+                    "events",
+                    "9999"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Error 422 - Invalid Organiser",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"organiser_id\": 4,\r\n    \"venue_id\": 1,\r\n    \"event_name\": \"Technology Conference 2026\",\r\n    \"description\": \"Annual technology conference.\",\r\n    \"event_date\": \"2026-11-10\",\r\n    \"start_time\": \"09:00:00\",\r\n    \"end_time\": \"17:00:00\",\r\n    \"ticket_price\": 50.00,\r\n    \"ticket_quantity\": 300,\r\n    \"status\": \"ACTIVE\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost/event_ticketing_api/events",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "path": [
+                    "event_ticketing_api",
+                    "events"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Error 409 - Delete Event With Booking",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost/event_ticketing_api/events/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "path": [
+                    "event_ticketing_api",
+                    "events",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Venues",
+          "item": [
+            {
+              "name": "GET All Venues",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost/event_ticketing_api/venues",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "path": [
+                    "event_ticketing_api",
+                    "venues"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GET Venue by ID",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost/event_ticketing_api/venues/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "path": [
+                    "event_ticketing_api",
+                    "venues",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "POST Create Venue",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"venue_name\": \"Innovation Hall\",\r\n    \"location\": \"Shah Alam\",\r\n    \"capacity\": 350,\r\n    \"status\": \"ACTIVE\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost/event_ticketing_api/venues",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "path": [
+                    "event_ticketing_api",
+                    "venues"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "PUT Update Venue",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"venue_name\": \"Innovation Hall Updated\",\r\n    \"location\": \"Shah Alam\",\r\n    \"capacity\": 400,\r\n    \"status\": \"ACTIVE\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost/event_ticketing_api/venues/7",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "path": [
+                    "event_ticketing_api",
+                    "venues",
+                    "7"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DELETE Venue",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost/event_ticketing_api/venues/7",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "path": [
+                    "event_ticketing_api",
+                    "venues",
+                    "7"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Error 404 - Venue Not Found",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost/event_ticketing_api/venues/9999",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "path": [
+                    "event_ticketing_api",
+                    "venues",
+                    "9999"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Error 409 - Delete Venue Used By Event",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost/event_ticketing_api/venues/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "path": [
+                    "event_ticketing_api",
+                    "venues",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Member 3 - User & Bookings API",
+      "item": [
+        {
+          "name": "Users API",
+          "item": [
+            {
+              "name": "GET All Users",
+              "protocolProfileBehavior": {
+                "disableCookies": false,
+                "followRedirects": true,
+                "maxResponseSize": 52428800,
+                "strictSSL": false
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost/event_ticketing_api/users",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "path": [
+                    "event_ticketing_api",
+                    "users"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "POST Create User",
+              "protocolProfileBehavior": {
+                "disableCookies": false,
+                "followRedirects": true,
+                "maxResponseSize": 52428800,
+                "strictSSL": false
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Test Customer\",\r\n  \"email\": \"customer.test@example.com\",\r\n  \"password\": \"Testing123!\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost/event_ticketing_api/users",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "path": [
+                    "event_ticketing_api",
+                    "users"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "PUT Update User",
+              "protocolProfileBehavior": {
+                "disableCookies": false,
+                "followRedirects": true,
+                "maxResponseSize": 52428800,
+                "strictSSL": false
+              },
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Updated Test Customer\",\r\n  \"email\": \"updated.customer@example.com\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost/event_ticketing_api/users/7",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "path": [
+                    "event_ticketing_api",
+                    "users",
+                    "7"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DELETE User",
+              "protocolProfileBehavior": {
+                "disableCookies": false,
+                "followRedirects": true,
+                "maxResponseSize": 52428800,
+                "strictSSL": false
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost/event_ticketing_api/users/7",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "path": [
+                    "event_ticketing_api",
+                    "users",
+                    "7"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Bookings API",
+          "item": [
+            {
+              "name": "GET Booking by ID",
+              "protocolProfileBehavior": {
+                "disableCookies": false,
+                "followRedirects": true,
+                "maxResponseSize": 52428800,
+                "strictSSL": false
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost/event_ticketing_api/bookings/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "path": [
+                    "event_ticketing_api",
+                    "bookings",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "POST Create Booking",
+              "protocolProfileBehavior": {
+                "disableCookies": false,
+                "followRedirects": true,
+                "maxResponseSize": 52428800,
+                "strictSSL": false
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"user_id\": 4,\r\n  \"event_id\": 1,\r\n  \"quantity\": 2\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost/event_ticketing_api/bookings",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "path": [
+                    "event_ticketing_api",
+                    "bookings"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "PUT Confirm Booking",
+              "protocolProfileBehavior": {
+                "disableCookies": false,
+                "followRedirects": true,
+                "maxResponseSize": 52428800,
+                "strictSSL": false
+              },
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Updated Test Customer\",\r\n  \"email\": \"updated.customer@example.com\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost/event_ticketing_api/users/7",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "path": [
+                    "event_ticketing_api",
+                    "users",
+                    "7"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DELETE Cancel Booking",
+              "protocolProfileBehavior": {
+                "disableCookies": false,
+                "followRedirects": true,
+                "maxResponseSize": 52428800,
+                "strictSSL": false
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost/event_ticketing_api/bookings/7",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "path": [
+                    "event_ticketing_api",
+                    "bookings",
+                    "7"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Error Testing",
+          "item": [
+            {
+              "name": "Bookings - PUT Invalid Status",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"booking_status\": \"APPROVED\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost/event_ticketing_api/bookings/7",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "path": [
+                    "event_ticketing_api",
+                    "bookings",
+                    "7"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GET Booking Not Found",
+              "protocolProfileBehavior": {
+                "disableCookies": false,
+                "followRedirects": true,
+                "maxResponseSize": 52428800,
+                "strictSSL": false
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost/event_ticketing_api/bookings/999",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "path": [
+                    "event_ticketing_api",
+                    "bookings",
+                    "999"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "POST Insufficient Tickets",
+              "protocolProfileBehavior": {
+                "disableCookies": false,
+                "followRedirects": true,
+                "maxResponseSize": 52428800,
+                "strictSSL": false
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"user_id\": 4,\r\n  \"event_id\": 1,\r\n  \"quantity\": 9999\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost/event_ticketing_api/bookings",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "path": [
+                    "event_ticketing_api",
+                    "bookings"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DELETE Already Cancelled",
+              "protocolProfileBehavior": {
+                "disableCookies": false,
+                "followRedirects": true,
+                "maxResponseSize": 52428800,
+                "strictSSL": false
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost/event_ticketing_api/bookings/7",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "path": [
+                    "event_ticketing_api",
+                    "bookings",
+                    "7"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "PUT Invalid Status",
+              "protocolProfileBehavior": {
+                "disableCookies": false,
+                "followRedirects": true,
+                "maxResponseSize": 52428800,
+                "strictSSL": false
+              },
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"booking_status\": \"CONFIRMED\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost/event_ticketing_api/bookings/6",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "path": [
+                    "event_ticketing_api",
+                    "bookings",
+                    "6"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Member 4 - Security & Middleware",
+      "item": [
+        {
+          "name": "GET Users — No Token — 401",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Expected HTTP 401',()=>pm.response.to.have.status(401));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/users.php",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "users.php"
+              ]
+            },
+            "description": "Converted from the user’s saved local Postman YAML request. Secret values replaced; no new response evidence added."
+          },
+          "response": []
+        },
+        {
+          "name": "GET Internal Status — Valid API Key",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{internal_api_key}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/auth/internal_status.php",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "internal_status.php"
+              ]
+            },
+            "description": "Converted from the user’s saved local Postman YAML request. Secret values replaced; no new response evidence added. Corrected original saved header name wrong-test-key to X-API-Key."
+          },
+          "response": []
+        },
+        {
+          "name": "GET Internal Status - Wrong API Key — 401",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Expected HTTP 401',()=>pm.response.to.have.status(401));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "wrong-test-key",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/auth/internal_status.php",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "internal_status.php"
+              ]
+            },
+            "description": "Converted from the user’s saved local Postman YAML request. Secret values replaced; no new response evidence added. Corrected original saved header name wrong-test-key to X-API-Key."
+          },
+          "response": []
+        },
+        {
+          "name": "GET Events — 200",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Expected HTTP 200',()=>pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/events.php",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "events.php"
+              ]
+            },
+            "description": "Converted from the user’s saved local Postman YAML request. Secret values replaced; no new response evidence added."
+          },
+          "response": []
+        },
+        {
+          "name": "POST Admin Login — 200",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Expected HTTP 200',()=>pm.response.to.have.status(200));",
+                  "if(pm.response.code===200)pm.collectionVariables.set('admin_token',pm.response.json().token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{admin_email}}\",\n  \"password\": \"{{admin_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login.php",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "login.php"
+              ]
+            },
+            "description": "Converted from the user’s saved local Postman YAML request. Secret values replaced; no new response evidence added."
+          },
+          "response": []
+        },
+        {
+          "name": "GET Users — Admin Token — 200",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Expected HTTP 200',()=>pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/users.php",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "users.php"
+              ]
+            },
+            "description": "Converted from the user’s saved local Postman YAML request. Secret values replaced; no new response evidence added."
+          },
+          "response": []
+        },
+        {
+          "name": "POST Organiser Login — 200",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Expected HTTP 200',()=>pm.response.to.have.status(200));",
+                  "if(pm.response.code===200)pm.collectionVariables.set('organiser_token',pm.response.json().token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{organiser_email}}\",\n  \"password\": \"{{organiser_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login.php",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "login.php"
+              ]
+            },
+            "description": "Converted from the user’s saved local Postman YAML request. Secret values replaced; no new response evidence added."
+          },
+          "response": []
+        },
+        {
+          "name": "GET Users — Organiser Denied — 403",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Expected HTTP 403',()=>pm.response.to.have.status(403));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{organiser_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/users.php",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "users.php"
+              ]
+            },
+            "description": "Converted from the user’s saved local Postman YAML request. Secret values replaced; no new response evidence added."
+          },
+          "response": []
+        },
+        {
+          "name": "POST Register — Missing Fields — 422",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Expected HTTP 422',()=>pm.response.to.have.status(422));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/users.php",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "users.php"
+              ]
+            },
+            "description": "Converted from the user’s saved local Postman YAML request. Secret values replaced; no new response evidence added."
+          },
+          "response": []
+        },
+        {
+          "name": "POST Register — Success — 201",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Expected HTTP 201',()=>pm.response.to.have.status(201));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Postman Test Customer\",\n  \"email\": \"{{customer_email}}\",\n  \"password\": \"{{customer_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/users.php",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "users.php"
+              ]
+            },
+            "description": "Converted from the user’s saved local Postman YAML request. Secret values replaced; no new response evidence added."
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE Booking 21 — Cancelled — 200",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Expected HTTP 200',()=>pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{customer_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/bookings.php?id=21",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "bookings.php"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "21"
+                }
+              ]
+            },
+            "description": "Converted from the user’s saved local Postman YAML request. Secret values replaced; no new response evidence added."
+          },
+          "response": []
+        },
+        {
+          "name": "POST Register — Duplicate Email — 409",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Expected HTTP 409',()=>pm.response.to.have.status(409));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Postman Test Customer\",\n  \"email\": \"{{customer_email}}\",\n  \"password\": \"{{customer_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/users.php",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "users.php"
+              ]
+            },
+            "description": "Converted from the user’s saved local Postman YAML request. Secret values replaced; no new response evidence added."
+          },
+          "response": []
+        },
+        {
+          "name": "POST Customer Login — 200",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Expected HTTP 200',()=>pm.response.to.have.status(200));",
+                  "if(pm.response.code===200)pm.collectionVariables.set('customer_token',pm.response.json().token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{customer_email}}\",\n  \"password\": \"{{customer_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login.php",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "login.php"
+              ]
+            },
+            "description": "Converted from the user’s saved local Postman YAML request. Secret values replaced; no new response evidence added."
+          },
+          "response": []
+        },
+        {
+          "name": "POST Booking — Customer — 201",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Expected HTTP 201',()=>pm.response.to.have.status(201));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{customer_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event_id\": 1,\n  \"quantity\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/bookings.php",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "bookings.php"
+              ]
+            },
+            "description": "Converted from the user’s saved local Postman YAML request. Secret values replaced; no new response evidence added."
+          },
+          "response": []
+        },
+        {
+          "name": "PUT Booking 20 — Organiser Approval — 200",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Expected HTTP 200',()=>pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{organiser_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"booking_status\": \"CONFIRMED\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/bookings.php?id=20",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "bookings.php"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "20"
+                }
+              ]
+            },
+            "description": "Converted from the user’s saved local Postman YAML request. Secret values replaced; no new response evidence added."
+          },
+          "response": []
+        },
+        {
+          "name": "GET Ticket 20 — Confirmed — 200",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Expected HTTP 200',()=>pm.response.to.have.status(200));",
+                  "if(pm.response.code===200 && pm.response.json().data.qr_token)pm.collectionVariables.set('qr_token',pm.response.json().data.qr_token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{customer_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/ticket.php?booking_id=20",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ticket.php"
+              ],
+              "query": [
+                {
+                  "key": "booking_id",
+                  "value": "20"
+                }
+              ]
+            },
+            "description": "Converted from the user’s saved local Postman YAML request. Secret values replaced; no new response evidence added."
+          },
+          "response": []
+        },
+        {
+          "name": "POST Check-in 20 — Success — 200",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Expected HTTP 200',()=>pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{organiser_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"qr_token\": \"{{qr_token}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/checkin.php",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "checkin.php"
+              ]
+            },
+            "description": "Converted from the user’s saved local Postman YAML request. Secret values replaced; no new response evidence added."
+          },
+          "response": []
+        },
+        {
+          "name": "GET Ticket 21 — Cancelled — 409",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Expected HTTP 409',()=>pm.response.to.have.status(409));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{customer_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/ticket.php?booking_id=21",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ticket.php"
+              ],
+              "query": [
+                {
+                  "key": "booking_id",
+                  "value": "21"
+                }
+              ]
+            },
+            "description": "Converted from the user’s saved local Postman YAML request. Secret values replaced; no new response evidence added."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Member 5 - API Management & Third-Party Integration",
+      "item": [
+        {
+          "name": "GET - Pagination Success",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost/event_ticketing_api/events.php?page=1&limit=2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "event_ticketing_api",
+                "events.php"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Invalid Pagination",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost/event_ticketing_api/events.php?page=0&limit=2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "event_ticketing_api",
+                "events.php"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "limit",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Search Events",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost/event_ticketing_api/events.php?search=Music",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "event_ticketing_api",
+                "events.php"
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "Music"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Filter Events",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost/event_ticketing_api/events.php?status=ACTIVE",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "event_ticketing_api",
+                "events.php"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "ACTIVE"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Sort Events",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost/event_ticketing_api/events.php?sort=ticket_price&order=desc",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "event_ticketing_api",
+                "events.php"
+              ],
+              "query": [
+                {
+                  "key": "sort",
+                  "value": "ticket_price"
+                },
+                {
+                  "key": "order",
+                  "value": "desc"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Combined API Features",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost/event_ticketing_api/events.php?search=Music&status=ACTIVE&sort=ticket_price&order=desc&page=1&limit=2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "event_ticketing_api",
+                "events.php"
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "Music"
+                },
+                {
+                  "key": "status",
+                  "value": "ACTIVE"
+                },
+                {
+                  "key": "sort",
+                  "value": "ticket_price"
+                },
+                {
+                  "key": "order",
+                  "value": "desc"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Invalid Filter Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost/event_ticketing_api/events.php?status=UNKNOWN",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "event_ticketing_api",
+                "events.php"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "UNKNOWN"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Invalid Sorting",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost/event_ticketing_api/events.php?sort=invalid_column&order=desc",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "event_ticketing_api",
+                "events.php"
+              ],
+              "query": [
+                {
+                  "key": "sort",
+                  "value": "invalid_column"
+                },
+                {
+                  "key": "order",
+                  "value": "desc"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - QR Code Success",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost/event_ticketing_api/qr_ticket.php?booking_id=1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "event_ticketing_api",
+                "qr_ticket.php"
+              ],
+              "query": [
+                {
+                  "key": "booking_id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - QR Pending Booking",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost/event_ticketing_api/qr_ticket.php?booking_id=4",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "event_ticketing_api",
+                "qr_ticket.php"
+              ],
+              "query": [
+                {
+                  "key": "booking_id",
+                  "value": "4"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - QR Booking Not Found",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost/event_ticketing_api/qr_ticket.php?booking_id=999",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "event_ticketing_api",
+                "qr_ticket.php"
+              ],
+              "query": [
+                {
+                  "key": "booking_id",
+                  "value": "999"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
