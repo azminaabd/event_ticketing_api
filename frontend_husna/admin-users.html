@@ -1,0 +1,307 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Manage Users | Event Ticketing System</title>
+
+    <link rel="stylesheet" href="style.css?v=4">
+</head>
+
+<body class="cozy-booking-body">
+
+    <header class="auth-header cozy-booking-header">
+        <a href="admin-dashboard.html" class="auth-logo">
+            🎟️ Event Ticketing System
+        </a>
+
+        <a href="admin-dashboard.html"
+           class="cozy-booking-home">
+            ← Dashboard
+        </a>
+    </header>
+
+    <main class="organizer-main">
+
+      <!-- ADMIN WELCOME -->
+<section class="organizer-welcome">
+
+    <span class="cozy-booking-eyebrow">
+        ✿ ADMIN SPACE ✿
+    </span>
+
+    <h1>Manage Users</h1>
+
+    <p>
+        View and manage registered users across the system.
+    </p>
+
+</section>
+
+
+<!-- ALL USERS -->
+<section class="organizer-events-section">
+
+    <div class="organizer-events-heading">
+
+    <div>
+        <h2>All User Collection</h2>
+
+        <p>
+            Monitor registered customers, organisers and administrators.
+        </p>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+
+        <span id="userCount">
+            0 Users
+        </span>
+
+        <button
+            type="button"
+            id="addOrganiserBtn"
+            class="organizer-event-edit-btn"
+            style="margin-top: 0;"
+        >
+            + Add Organiser
+        </button>
+
+    </div>
+
+</div>
+
+    <!-- SEARCH, FILTER & SORT USERS -->
+    <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px;">
+
+        <!-- SEARCH -->
+        <input
+            type="text"
+            id="userSearch"
+            placeholder="Search by name or user ID..."
+            style="flex: 2; min-width: 220px; padding: 13px;
+                   border: 1px solid #d7dfd2; border-radius: 12px;"
+        >
+
+        <!-- FILTER BY ROLE -->
+        <select
+            id="userRoleFilter"
+            style="flex: 1; min-width: 150px; padding: 13px;
+                   border: 1px solid #d7dfd2; border-radius: 12px;"
+        >
+            <option value="ALL">All Roles</option>
+            <option value="ADMIN">Admin</option>
+            <option value="ORGANISER">Organiser</option>
+            <option value="CUSTOMER">Customer</option>
+        </select>
+
+        <!-- SORT USERS -->
+        <select
+            id="userSort"
+            style="flex: 1; min-width: 180px; padding: 13px;
+                   border: 1px solid #d7dfd2; border-radius: 12px;"
+        >
+            <option value="oldest">Oldest Registered</option>
+            <option value="newest">Newest Registered</option>
+            <option value="name_asc">Name A–Z</option>
+            <option value="name_desc">Name Z–A</option>
+        </select>
+
+    </div>
+
+    <p id="usersMessage" role="status">
+        Loading users...
+    </p>
+
+    <div style="overflow-x: auto; margin-top: 20px;">
+
+        <table class="admin-bookings-table">
+
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Registered Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody id="adminUsersList">
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+      <p class="cozy-booking-bottom-note">
+    Every user is part of our wonderful event community ✿
+</p>
+
+    </main>
+
+    <!-- =====================================
+         EDIT USER MODAL
+    ===================================== -->
+    <div id="editUserModal" class="admin-user-modal">
+
+        <div class="admin-user-modal-content">
+
+            <div class="admin-user-modal-heading">
+                <div>
+                    <h2>Edit User Details</h2>
+                    <p>Update the user's account information.</p>
+                </div>
+
+                <button type="button" id="closeEditUserModal"
+                        class="admin-user-modal-close"
+                        aria-label="Close edit user form">
+                    &times;
+                </button>
+            </div>
+
+            <form id="editUserForm">
+
+                <input type="hidden" id="editUserId">
+
+                <label for="editUserName">Full Name</label>
+                <input
+                    type="text"
+                    id="editUserName"
+                    maxlength="100"
+                    required
+                    placeholder="Enter full name"
+                >
+
+                <label for="editUserEmail">Email Address</label>
+                <input
+                    type="email"
+                    id="editUserEmail"
+                    maxlength="150"
+                    required
+                    placeholder="Enter email address"
+                >
+
+                <label for="editUserRole">Account Role</label>
+                <input
+                    type="text"
+                    id="editUserRole"
+                    disabled
+                >
+
+                <div class="admin-user-modal-actions">
+
+                    <button type="button"
+                            id="cancelEditUser"
+                            class="admin-user-cancel-btn">
+                        Cancel
+                    </button>
+
+                    <button type="submit"
+                            id="saveEditUser"
+                            class="admin-user-save-btn">
+                        Save Changes
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- =====================================
+     CREATE ORGANISER MODAL
+===================================== -->
+<div id="createOrganiserModal" class="admin-user-modal">
+
+    <div class="admin-user-modal-content">
+
+        <div class="admin-user-modal-heading">
+            <div>
+                <h2>Create Organiser</h2>
+                <p>Register a new event organiser account.</p>
+            </div>
+
+            <button
+                type="button"
+                id="closeCreateOrganiserModal"
+                class="admin-user-modal-close"
+                aria-label="Close create organiser form">
+                &times;
+            </button>
+        </div>
+
+        <form id="createOrganiserForm">
+
+            <label for="organiserName">Full Name</label>
+            <input
+                type="text"
+                id="organiserName"
+                maxlength="100"
+                required
+                placeholder="Enter organiser name"
+            >
+
+            <label for="organiserEmail">Email Address</label>
+            <input
+                type="email"
+                id="organiserEmail"
+                maxlength="150"
+                required
+                placeholder="Enter organiser email"
+            >
+
+            <label for="organiserPassword">Password</label>
+            <input
+                type="password"
+                id="organiserPassword"
+                minlength="8"
+                maxlength="72"
+                required
+                autocomplete="new-password"
+                placeholder="Enter password (minimum 8 characters)"
+            >
+
+            <label for="organiserRole">Account Role</label>
+            <input
+                type="text"
+                id="organiserRole"
+                value="ORGANISER"
+                disabled
+            >
+
+            <div class="admin-user-modal-actions">
+
+                <button
+                    type="button"
+                    id="cancelCreateOrganiser"
+                    class="admin-user-cancel-btn">
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    id="saveCreateOrganiser"
+                    class="admin-user-save-btn">
+                    Create Organiser
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+    <script src="admin-users.js"></script>
+
+</body>
+</html>

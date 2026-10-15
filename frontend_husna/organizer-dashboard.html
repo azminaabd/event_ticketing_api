@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organizer Dashboard | Event Ticketing System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="cozy-booking-body">
+
+    <header class="auth-header cozy-booking-header">
+        <a href="organizer-dashboard.html" class="auth-logo">
+            🎟️ Event Ticketing System
+        </a>
+
+        <button id="organizerLogout" type="button"
+    style="background:#3e6344; color:#ffffff; border:none;
+           border-radius:12px; padding:14px 26px;
+           font-size:14px; font-weight:700;
+           cursor:pointer; font-family:Arial,sans-serif;">
+    Logout ✿
+</button>
+    </header>
+
+    <main class="organizer-main">
+
+        <section class="organizer-welcome">
+            <span class="cozy-booking-eyebrow">
+                ✿ ORGANIZER SPACE ✿
+            </span>
+
+            <h1>Organizer Dashboard</h1>
+
+            <p id="organizerWelcome">
+                Welcome to your event management space.
+            </p>
+        </section>
+
+        <section class="organizer-cards">
+
+            <article class="organizer-card">
+                <span>✿ EVENT MANAGEMENT</span>
+                <h2>My Events</h2>
+                <p>
+                    View and manage your upcoming events
+                    in one lovely place.
+                </p>
+                <a href="organizer-events.html"
+   style="display:inline-flex; align-items:center;
+          justify-content:center; width:fit-content;
+          padding:15px 28px; background:#3e6344;
+          color:#ffffff; border-radius:12px;
+          font-size:14px; font-weight:700;
+          text-decoration:none;
+          box-shadow:0 8px 18px rgba(55,85,58,0.15);">
+    Manage Events ✿
+</a>
+            </article>
+
+            <article class="organizer-card">
+                <span>✿ BOOKING MANAGEMENT</span>
+                <h2>Manage Bookings</h2>
+                <p>
+                    Review customer reservations and
+                    manage booking confirmations.
+                </p>
+                <a href="organizer-bookings.html"
+   style="display:inline-flex; align-items:center;
+          justify-content:center; width:fit-content;
+          padding:15px 28px; background:#3e6344;
+          color:#ffffff; border-radius:12px;
+          font-size:14px; font-weight:700;
+          text-decoration:none;
+          box-shadow:0 8px 18px rgba(55,85,58,0.15);">
+    View Bookings ✿
+</a>
+            </article>
+
+        </section>
+
+        <p class="cozy-booking-bottom-note">
+            Every wonderful event starts with a little planning ✿
+        </p>
+
+    </main>
+
+    <script src="organizer-dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Event Ticketing System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="cozy-booking-body">
+
+    <header class="auth-header cozy-booking-header">
+        <a href="admin-dashboard.html" class="auth-logo">
+            🎟️ Event Ticketing System
+        </a>
+
+        <button id="adminLogout" type="button"
+            style="background:#3e6344; color:#ffffff; border:none;
+                   border-radius:12px; padding:14px 26px;
+                   font-size:14px; font-weight:700; cursor:pointer;">
+            Logout ✿
+        </button>
+    </header>
+
+    <main class="organizer-main">
+
+        <section class="organizer-welcome">
+            <span class="cozy-booking-eyebrow">
+                ✿ ADMIN SPACE ✿
+            </span>
+
+            <h1>Admin Dashboard</h1>
+
+            <p id="adminWelcome">
+                Welcome to your administration space.
+            </p>
+        </section>
+
+        <section class="organizer-cards">
+
+            <article class="organizer-card">
+                <span>✿ EVENT MANAGEMENT</span>
+                <h2>Manage Events</h2>
+                <p>
+                    Create, view, edit and manage events
+                    across the system.
+                </p>
+                <a href="admin-events.html"
+                   class="cozy-home-explore-btn">
+                    Manage Events ✿
+                </a>
+            </article>
+
+            <article class="organizer-card">
+                <span>✿ VENUE MANAGEMENT</span>
+                <h2>Manage Venues</h2>
+                <p>
+                    Manage venue information, capacity
+                    and availability.
+                </p>
+                <a href="admin-venues.html"
+                   class="cozy-home-explore-btn">
+                    Manage Venues ✿
+                </a>
+            </article>
+
+            <article class="organizer-card">
+                <span>✿ BOOKING MANAGEMENT</span>
+                <h2>Manage Bookings</h2>
+                <p>
+                    Review and manage customer bookings
+                    across all events.
+                </p>
+                <a href="admin-bookings.html"
+                   class="cozy-home-explore-btn">
+                    Manage Bookings ✿
+                </a>
+            </article>
+
+            <article class="organizer-card">
+                <span>✿ USER MANAGEMENT</span>
+                <h2>Manage Users</h2>
+                <p>
+                    View and manage registered users
+                    and their account information.
+                </p>
+                <a href="admin-users.html"
+                   class="cozy-home-explore-btn">
+                    Manage Users ✿
+                </a>
+            </article>
+
+        </section>
+
+        <p class="cozy-booking-bottom-note">
+            A little organization makes every event wonderful ✿
+        </p>
+
+    </main>
+
+    <script src="admin-dashboard.js"></script>
+</body>
+</html>

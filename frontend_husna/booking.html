@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Book Tickets | Event Ticketing System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="cozy-booking-body">
+
+    <!-- MEMBER 5 - BOOKING PAGE HEADER -->
+    <header class="auth-header cozy-booking-header">
+        <a href="index.html" class="auth-logo">
+            🎟️ Event Ticketing System
+        </a>
+
+        <a href="index.html" class="cozy-booking-home">
+            Explore Events ↗
+        </a>
+    </header>
+
+    <main class="bookings-main cozy-booking-main">
+
+        <!-- Decorative flowers -->
+        <span class="cozy-booking-flower flower-one"
+              aria-hidden="true">✿</span>
+
+        <span class="cozy-booking-flower flower-two"
+              aria-hidden="true">✾</span>
+
+        <span class="cozy-booking-flower flower-three"
+              aria-hidden="true">✿</span>
+
+        <section class="bookings-container cozy-booking-container">
+
+            <!-- PAGE HEADING -->
+            <div class="bookings-heading cozy-booking-heading">
+
+                <span class="cozy-booking-eyebrow">
+                    ✿ YOUR LITTLE TICKET ✿
+                </span>
+
+                <h1>Let's Book Your Ticket!</h1>
+
+                <p>
+                    Your next lovely experience is
+                    just a little booking away.
+                </p>
+
+            </div>
+
+            <!-- MAIN BOOKING CARD -->
+            <div class="booking-page-card cozy-ticket-card">
+
+                <div class="cozy-ticket-top">
+
+                    <span class="cozy-ticket-label">
+                        EVENT RESERVATION
+                    </span>
+
+                    <span class="cozy-ticket-icon"
+                          aria-hidden="true">
+                        🎟️
+                    </span>
+
+                </div>
+
+                <h2>Your Booking Details</h2>
+
+                <!-- Loading / Error Message -->
+                <p id="bookingMessage"
+                   class="cozy-booking-message"
+                   role="status"
+                   aria-live="polite">
+                    Please select an event from
+                    Explore Events to begin.
+                </p>
+
+                <!-- Event Details -->
+                <div id="bookingDetails" hidden>
+
+                    <div class="cozy-booking-event">
+
+                        <span class="cozy-detail-caption">
+                            ✿ SELECTED EVENT
+                        </span>
+
+                        <h3 id="bookingEventName"></h3>
+
+                    </div>
+
+                    <div class="cozy-booking-info">
+
+                        <div class="cozy-booking-info-row">
+                            <span>📅 Event Date</span>
+                            <strong id="bookingEventDate"></strong>
+                        </div>
+
+                        <div class="cozy-booking-info-row">
+                            <span>🕒 Event Time</span>
+                            <strong id="bookingEventTime"></strong>
+                        </div>
+
+                        <div class="cozy-booking-info-row">
+                            <span>🎫 Price per Ticket</span>
+                            <strong id="bookingTicketPrice"></strong>
+                        </div>
+
+                    </div>
+
+                    <!-- Decorative ticket separator -->
+                    <div class="cozy-ticket-divider"
+                         aria-hidden="true">
+                        <span></span>
+                        <span>✿ ✿ ✿</span>
+                        <span></span>
+                    </div>
+
+                    <!-- BOOKING FORM -->
+                    <div class="booking-form-section cozy-booking-form">
+
+                        <div class="cozy-quantity-section">
+
+                            <div>
+                                <label for="ticketQuantity">
+                                    Ticket Quantity
+                                </label>
+
+                                <p>
+                                    Choose how many tickets
+                                    you'd like.
+                                </p>
+                            </div>
+
+                            <input
+                                type="number"
+                                id="ticketQuantity"
+                                min="1"
+                                max="10"
+                                step="1"
+                                value="1"
+                            >
+
+                        </div>
+
+                        <!-- TOTAL PRICE -->
+                        <div class="cozy-total-box">
+
+                            <div>
+                                <span>Total Amount</span>
+                                <p>
+                                    Calculated based on
+                                    your ticket quantity.
+                                </p>
+                            </div>
+
+                            <strong id="totalBookingPrice">
+                                RM 0.00
+                            </strong>
+
+                        </div>
+
+                        <button
+    type="button"
+    id="confirmBookingBtn"
+    class="ticket-button cozy-confirm-btn"
+>
+    Confirm Booking ✿
+</button>
+
+                       <p class="demo-note cozy-booking-note"
+   id="bookingSubmitMessage"
+   role="status"
+   aria-live="polite">
+    ✿ Please review your booking before confirming.
+</p>
+
+<a href="my-bookings.html"
+   id="viewMyBookingsBtn"
+   class="cozy-view-bookings-btn"
+   hidden>
+    View My Bookings →
+</a>
+
+                    </div>
+
+                </div>
+
+                <!-- BACK LINK -->
+                <a href="index.html"
+                   class="bookings-explore-link cozy-back-link">
+                    ← Back to Explore Events
+                </a>
+
+            </div>
+
+            <p class="cozy-booking-bottom-note">
+                Made for lovely moments and happy memories ✿
+            </p>
+
+        </section>
+
+    </main>
+
+    <script src="booking.js"></script>
+</body>
+</html>

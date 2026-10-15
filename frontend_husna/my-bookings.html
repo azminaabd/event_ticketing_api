@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Bookings | Event Ticketing System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="cozy-booking-body">
+
+    <header class="auth-header cozy-booking-header">
+        <a href="index.html" class="auth-logo">
+            🎟️ Event Ticketing System
+        </a>
+
+        <a href="index.html" class="cozy-booking-home">
+            Explore Events ↗
+        </a>
+    </header>
+
+    <main class="bookings-main cozy-booking-main">
+
+        <span class="cozy-booking-flower flower-one"
+              aria-hidden="true">✿</span>
+
+        <span class="cozy-booking-flower flower-two"
+              aria-hidden="true">✾</span>
+
+        <section class="bookings-container cozy-booking-container">
+
+            <div class="bookings-heading cozy-booking-heading">
+
+                <span class="cozy-booking-eyebrow">
+                    ✿ YOUR EVENT MEMORIES ✿
+                </span>
+
+                <h1>My Bookings</h1>
+
+                <p id="myBookingsWelcome">
+                    Your lovely events, all in one place.
+                </p>
+
+            </div>
+
+            <div id="bookingsContainer" class="bookings-grid">
+
+    <p id="myBookingsMessage"
+       class="cozy-booking-message"
+       role="status"
+       aria-live="polite">
+        Loading your bookings...
+    </p>
+
+    <div id="myBookingsActions" hidden>
+        <a href="index.html"
+           class="cozy-view-bookings-btn">
+            Explore More Events →
+        </a>
+    </div>
+
+</div>
+
+            </div>
+
+            <p class="cozy-booking-bottom-note">
+                Every ticket is a little memory ✿
+            </p>
+
+        </section>
+
+    </main>
+
+    <script src="my-bookings.js"></script>
+</body>
+</html>

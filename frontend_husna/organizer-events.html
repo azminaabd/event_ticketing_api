@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Events | Event Ticketing System</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="cozy-booking-body">
+
+    <header class="auth-header cozy-booking-header">
+        <a href="organizer-dashboard.html" class="auth-logo">
+            🎟️ Event Ticketing System
+        </a>
+
+        <a href="organizer-dashboard.html"
+           class="cozy-booking-home">
+            ← Dashboard
+        </a>
+    </header>
+
+    <main class="organizer-main">
+
+        <section class="organizer-welcome">
+            <span class="cozy-booking-eyebrow">
+                ✿ ORGANIZER SPACE ✿
+            </span>
+
+            <h1>My Events</h1>
+
+            <p>
+                Manage your own events in one lovely place.
+            </p>
+        </section>
+
+        <section class="organizer-events-section">
+
+            <div class="organizer-events-heading">
+                <div>
+                    <h2>Your Event Collection</h2>
+                    <p>
+                        View your events and update their details.
+                    </p>
+                </div>
+
+                <span id="eventCount">
+                    0 Events
+                </span>
+            </div>
+
+            <p id="eventsMessage" role="status">
+                Loading your events...
+            </p>
+
+            <div id="organizerEventsList"
+                 class="organizer-cards">
+            </div>
+
+        </section>
+
+        <!-- EDIT EVENT MODAL -->
+        <div id="editEventModal"
+             class="organizer-edit-overlay"
+             hidden>
+
+            <div class="organizer-edit-panel"
+                 role="dialog"
+                 aria-modal="true"
+                 aria-labelledby="editEventTitle">
+
+                <div class="organizer-edit-heading">
+                    <div>
+                        <span class="cozy-booking-eyebrow">
+                            ✿ EVENT MANAGEMENT ✿
+                        </span>
+
+                        <h2 id="editEventTitle">
+                            Edit Event
+                        </h2>
+                    </div>
+
+                    <button type="button"
+                            id="closeEditEvent"
+                            aria-label="Close edit form">
+                        ✕
+                    </button>
+                </div>
+
+                <form id="editEventForm">
+
+                    <input type="hidden"
+                           id="editEventId">
+
+                    <label for="editEventName">
+                        Event Name
+                    </label>
+                    <input type="text"
+                           id="editEventName"
+                           required>
+
+                    <label for="editEventDescription">
+                        Description
+                    </label>
+                    <textarea id="editEventDescription"
+                              rows="3"></textarea>
+
+                    <label for="editEventVenue">
+                        Venue ID
+                    </label>
+                    <input type="number"
+                           id="editEventVenue"
+                           min="1"
+                           required>
+
+                    <label for="editEventDate">
+                        Event Date
+                    </label>
+                    <input type="date"
+                           id="editEventDate"
+                           required>
+
+                    <label for="editEventStart">
+                        Start Time
+                    </label>
+                    <input type="time"
+                           id="editEventStart"
+                           required>
+
+                    <label for="editEventEnd">
+                        End Time
+                    </label>
+                    <input type="time"
+                           id="editEventEnd"
+                           required>
+
+                    <label for="editEventPrice">
+                        Ticket Price (RM)
+                    </label>
+                    <input type="number"
+                           id="editEventPrice"
+                           min="0"
+                           step="0.01"
+                           required>
+
+                    <label for="editEventQuantity">
+                        Ticket Quantity
+                    </label>
+                    <input type="number"
+                           id="editEventQuantity"
+                           min="1"
+                           required>
+
+                    <label for="editEventStatus">
+                        Event Status
+                    </label>
+                    <select id="editEventStatus" required>
+                        <option value="ACTIVE">ACTIVE</option>
+                        <option value="CANCELLED">CANCELLED</option>
+                        <option value="COMPLETED">COMPLETED</option>
+                    </select>
+
+                    <p id="editEventMessage"
+                       role="status"></p>
+
+                    <div class="organizer-edit-actions">
+                        <button type="button"
+                                id="cancelEditEvent">
+                            Cancel
+                        </button>
+
+                        <button type="submit"
+                                id="saveEditEvent">
+                            Save Changes ✿
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        <p class="cozy-booking-bottom-note">
+            Every wonderful event starts with a little planning ✿
+        </p>
+
+    </main>
+
+    <script src="organizer-events.js"></script>
+
+</body>
+</html>

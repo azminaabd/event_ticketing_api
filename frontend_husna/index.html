@@ -1,0 +1,219 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Event Discovery | Event Ticketing System</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo">🎟️ Event Ticketing System</div>  
+
+<nav id="mainNavigation">
+
+    <a href="#events">Explore Events</a>
+
+    <!-- Shown only after customer login -->
+    <a href="my-bookings.html"
+       id="myBookingsLink"
+       hidden>
+        My Bookings
+    </a>
+
+    <span id="welcomeUser" hidden></span>
+
+    <!-- Shown before login -->
+    <a href="login.html" id="loginNavLink">
+        Login
+    </a>
+
+    <a href="register.html"
+       id="registerNavLink"
+       class="nav-register">
+        Register
+    </a>
+
+    <!-- Shown after login -->
+    <button type="button"
+            id="logoutBtn"
+            class="cozy-logout-btn"
+            hidden>
+        Logout ✿
+    </button>
+
+</nav>
+
+
+    </header>
+
+    <main>
+        
+<!-- MEMBER 5 - COZY CUSTOMER HOMEPAGE -->
+<section class="hero cozy-home-hero">
+
+    <div class="cozy-home-decor cozy-home-flower"
+         aria-hidden="true">✿</div>
+
+    <div class="cozy-home-decor cozy-home-sparkle"
+         aria-hidden="true">✧</div>
+
+    <div class="cozy-home-hero-content">
+
+        <span class="cozy-home-eyebrow">
+            ✿ YOUR NEXT ADVENTURE STARTS HERE ✿
+        </span>
+
+        <h1>
+            Little Moments,
+            <span>Beautiful Memories.</span>
+        </h1>
+
+        <p>
+            Discover exciting events, explore wonderful
+            experiences, and create memories worth keeping.
+        </p>
+
+        <a href="#events" class="cozy-home-explore-btn">
+            Explore Events ✿
+        </a>
+
+    </div>
+
+    <div class="cozy-home-ticket" aria-hidden="true">
+        <span>✦ SPECIAL INVITATION ✦</span>
+        <div class="cozy-home-ticket-icon">🎟️</div>
+        <strong>You're Invited!</strong>
+        <small>LET THE MEMORIES BEGIN</small>
+    </div>
+
+</section>
+
+
+        <section class="dashboard" id="events">
+            <h2>Explore Events</h2>
+
+            <div class="controls">
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search events by name..."
+                >
+
+                <select id="statusFilter">
+                    <option value="">All Statuses</option>
+                    <option value="ACTIVE">Active</option>
+                    <option value="CANCELLED">Cancelled</option>
+                    <option value="COMPLETED">Completed</option>
+                </select>
+
+                <select id="sortSelect">
+                    <option value="event_id-asc">Default</option>
+                    <option value="event_name-asc">Name A-Z</option>
+                    <option value="event_date-asc">Date: Earliest First</option>
+                    <option value="ticket_price-asc">Price: Low to High</option>
+                    <option value="ticket_price-desc">Price: High to Low</option>
+                </select>
+            </div>
+
+            <div id="loadingMessage">Loading events...</div>
+
+            <div id="eventContainer" class="event-grid">
+                <!-- Event cards will be loaded from Events API -->
+            </div>
+
+            <div class="pagination">
+                <button id="prevBtn" type="button">Previous</button>
+                <span id="pageInfo">Page 1</span>
+                <button id="nextBtn" type="button">Next</button>
+            </div>
+        </section>
+
+        
+<!-- MEMBER 5 - EVENT DETAILS MODAL -->
+<dialog id="eventModal" class="event-modal">
+    <div class="modal-header">
+        <h2 id="modalEventName">Event Details</h2>
+        <button
+            type="button"
+            id="closeModalBtn"
+            class="modal-close"
+            aria-label="Close event details"
+        >×</button>
+    </div>
+
+    <div class="modal-content">
+        <p id="modalDescription"></p>
+
+        <p>
+            <strong>Date:</strong>
+            <span id="modalDate"></span>
+        </p>
+
+        <p>
+            <strong>Time:</strong>
+            <span id="modalTime"></span>
+        </p>
+
+<p>
+    <strong>Venue:</strong>
+    <span id="modalVenue">Loading...</span>
+</p>
+
+<p>
+    <strong>Location:</strong>
+    <span id="modalLocation">Loading...</span>
+</p>
+
+
+        <p>
+            <strong>Ticket Price:</strong>
+            <span id="modalPrice"></span>
+        </p>
+
+        <p>
+            <strong>Event Status:</strong>
+            <span id="modalStatus"></span>
+        </p>
+
+    
+<!-- MEMBER 5 - BOOK NOW BUTTON -->
+<button
+    type="button"
+    id="bookNowBtn"
+    class="ticket-button"
+    disabled
+>
+    Book Now — Login Integration Pending
+</button>
+
+<p class="demo-note">
+    Please log in to book tickets.
+    Booking will be available after
+    authentication integration.
+</p>
+
+        <p class="demo-note">
+            Booking will be enabled after customer
+            authentication is integrated.
+        </p>
+    </div>
+</dialog>
+
+
+    </main>
+
+    <footer>
+        <p>Event Ticketing and Venue Booking System</p>
+        <p>Member 5 — Event Discovery Dashboard</p>
+    </footer>
+
+    <script src="app.js"></script>
+
+</body>
+</html>

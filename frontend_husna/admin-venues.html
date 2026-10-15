@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Manage Venues | Event Ticketing System</title>
+
+    <link rel="stylesheet" href="style.css?v=4">
+</head>
+
+<body class="cozy-booking-body">
+
+    <header class="auth-header cozy-booking-header">
+        <a href="admin-dashboard.html" class="auth-logo">
+            🎟️ Event Ticketing System
+        </a>
+
+        <a href="admin-dashboard.html"
+           class="cozy-booking-home">
+            ← Dashboard
+        </a>
+    </header>
+
+    <main class="organizer-main">
+
+        <section class="organizer-welcome">
+            <span class="cozy-booking-eyebrow">
+    ✿ ADMIN SPACE ✿
+</span>
+
+<h1>Manage Venues</h1>
+
+<p>
+    Create, view and manage all venues in one lovely place.
+</p>
+        </section>
+
+        <section class="organizer-events-section">
+
+            <div class="organizer-events-heading">
+                <div>
+                    <h2>All Venue Collection</h2>
+<p>
+    View and update venues across the system.
+</p>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+
+    <button
+    type="button"
+    id="createVenueButton"
+    class="organizer-event-edit-btn">
+    + Create Venue ✿
+</button>
+
+<span id="venueCount">
+    0 Venues
+</span>
+
+</div>
+            </div>
+
+            <p id="venuesMessage" role="status">
+    Loading venues...
+</p>
+
+<div id="adminVenuesList"
+     class="organizer-cards">
+</div>
+        </section>
+
+        <!-- CREATE VENUE MODAL -->
+<div id="createVenueModal"
+     class="organizer-edit-overlay"
+     hidden>
+
+    <div class="organizer-edit-panel"
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="createVenueTitle">
+
+        <div class="organizer-edit-heading">
+            <div>
+                <span class="cozy-booking-eyebrow">
+                    ✿ ADMIN VENUE MANAGEMENT ✿
+                </span>
+
+                <h2 id="createVenueTitle">
+                    Create New Venue
+                </h2>
+            </div>
+
+            <button type="button"
+                    id="closeCreateVenue"
+                    aria-label="Close create form">
+                ✕
+            </button>
+        </div>
+
+        <form id="createVenueForm">
+
+            <label for="createVenueName">
+                Venue Name
+            </label>
+            <input type="text"
+                   id="createVenueName"
+                   required>
+
+            <label for="createVenueLocation">
+                Location
+            </label>
+            <input type="text"
+                   id="createVenueLocation"
+                   required>
+
+            <label for="createVenueCapacity">
+                Capacity
+            </label>
+            <input type="number"
+                   id="createVenueCapacity"
+                   min="1"
+                   step="1"
+                   required>
+
+            <label for="createVenueStatus">
+                Venue Status
+            </label>
+            <select id="createVenueStatus" required>
+                <option value="ACTIVE">ACTIVE</option>
+                <option value="INACTIVE">INACTIVE</option>
+            </select>
+
+            <p id="createVenueMessage"
+               role="status"></p>
+
+            <div class="organizer-edit-actions">
+
+                <button type="button"
+                        id="cancelCreateVenue">
+                    Cancel
+                </button>
+
+                <button type="submit"
+        id="saveCreateVenue"
+        class="organizer-event-edit-btn">
+    Create Venue ✿
+</button>
+
+            </div>
+
+        </form>
+    </div>
+</div>
+
+        <!-- EDIT EVENT MODAL -->
+<!-- EDIT VENUE MODAL -->
+<div id="editVenueModal"
+     class="organizer-edit-overlay"
+     hidden>
+
+    <div class="organizer-edit-panel"
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="editVenueTitle">
+
+        <div class="organizer-edit-heading">
+            <div>
+                <span class="cozy-booking-eyebrow">
+                    ✿ VENUE MANAGEMENT ✿
+                </span>
+
+                <h2 id="editVenueTitle">
+                    Edit Venue
+                </h2>
+            </div>
+
+            <button type="button"
+                    id="closeEditVenue"
+                    aria-label="Close edit form">
+                ✕
+            </button>
+        </div>
+
+        <form id="editVenueForm">
+
+            <input type="hidden"
+                   id="editVenueId">
+
+            <label for="editVenueName">
+                Venue Name
+            </label>
+            <input type="text"
+                   id="editVenueName"
+                   required>
+
+            <label for="editVenueLocation">
+                Location
+            </label>
+            <input type="text"
+                   id="editVenueLocation"
+                   required>
+
+            <label for="editVenueCapacity">
+                Capacity
+            </label>
+            <input type="number"
+                   id="editVenueCapacity"
+                   min="1"
+                   step="1"
+                   required>
+
+            <label for="editVenueStatus">
+                Venue Status
+            </label>
+            <select id="editVenueStatus" required>
+                <option value="ACTIVE">ACTIVE</option>
+                <option value="INACTIVE">INACTIVE</option>
+            </select>
+
+            <p id="editVenueMessage"
+               role="status"></p>
+
+            <div class="organizer-edit-actions">
+                <button type="button"
+        id="cancelEditVenue"
+        class="organizer-dashboard-logout">
+    Cancel
+</button>
+
+               <button type="submit"
+        id="saveEditVenue"
+        class="organizer-event-edit-btn">
+    Save Changes ✿
+</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+        <p class="cozy-booking-bottom-note">
+    Every wonderful event deserves the perfect venue ✿
+</p>
+
+    </main>
+
+    <script src="admin-venues.js?v=3"></script>
+
+</body>
+</html>

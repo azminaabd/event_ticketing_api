@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Manage Bookings| Event Ticketing System</title>
+
+    <link rel="stylesheet" href="style.css?v=4">
+</head>
+
+<body class="cozy-booking-body">
+
+    <header class="auth-header cozy-booking-header">
+        <a href="admin-dashboard.html" class="auth-logo">
+            🎟️ Event Ticketing System
+        </a>
+
+        <a href="admin-dashboard.html"
+           class="cozy-booking-home">
+            ← Dashboard
+        </a>
+    </header>
+
+    <main class="organizer-main">
+
+        <!-- ADMIN WELCOME -->
+<section class="organizer-welcome">
+
+    <span class="cozy-booking-eyebrow">
+        ✿ ADMIN SPACE ✿
+    </span>
+
+    <h1>Manage Bookings</h1>
+
+    <p>
+        View and manage customer bookings across all events.
+    </p>
+
+</section>
+
+<!-- ADMIN BOOKING STATISTICS -->
+<section class="admin-booking-stats">
+
+    <div class="admin-booking-stat-card">
+        <span>Total Bookings</span>
+        <h2 id="statTotalBookings">0</h2>
+        <p>All booking records</p>
+    </div>
+
+    <div class="admin-booking-stat-card">
+        <span>Confirmed Booking Value</span>
+        <h2 id="statBookingValue">RM 0.00</h2>
+        <p>Value of confirmed bookings</p>
+    </div>
+
+    <div class="admin-booking-stat-card">
+        <span>Pending Bookings</span>
+        <h2 id="statPendingBookings">0</h2>
+        <p>Awaiting confirmation</p>
+    </div>
+
+    <div class="admin-booking-stat-card">
+        <span>Cancelled Bookings</span>
+        <h2 id="statCancelledBookings">0</h2>
+        <p>Cancelled reservations</p>
+    </div>
+
+</section>
+
+<!-- ALL BOOKINGS -->
+<section class="organizer-events-section">
+
+    <div class="organizer-events-heading">
+
+        <div>
+            <h2>All Booking Collection</h2>
+
+            <p>
+                Monitor booking details, confirmations and cancellations.
+            </p>
+        </div>
+
+        <span id="bookingCount">
+            0 Bookings
+        </span>
+
+    </div>
+
+<!-- ADMIN BOOKING SEARCH, FILTER & SORT -->
+<div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px;">
+
+    <!-- SEARCH BOOKINGS -->
+    <input
+        type="text"
+        id="bookingSearch"
+        placeholder="Search Booking, Customer or Event ID..."
+        style="flex: 2; min-width: 220px; padding: 13px;
+               border: 1px solid #d7dfd2; border-radius: 12px;"
+    >
+
+    <!-- FILTER BY BOOKING STATUS -->
+    <select
+        id="bookingStatusFilter"
+        style="flex: 1; min-width: 150px; padding: 13px;
+               border: 1px solid #d7dfd2; border-radius: 12px;"
+    >
+        <option value="ALL">All Status</option>
+        <option value="PENDING">Pending</option>
+        <option value="CONFIRMED">Confirmed</option>
+        <option value="CANCELLED">Cancelled</option>
+    </select>
+
+    <!-- SORT BOOKINGS -->
+    <select
+        id="bookingSort"
+        style="flex: 1; min-width: 180px; padding: 13px;
+               border: 1px solid #d7dfd2; border-radius: 12px;"
+    >
+        <option value="newest">Newest Booking</option>
+        <option value="oldest">Oldest Booking</option>
+        <option value="id_asc">Booking ID: Low to High</option>
+        <option value="id_desc">Booking ID: High to Low</option>
+    </select>
+
+</div>
+
+    <p id="bookingsMessage" role="status">
+        Loading bookings...
+    </p>
+
+    <div style="overflow-x: auto; margin-top: 20px;">
+
+    <table class="admin-bookings-table">
+
+        <thead>
+            <tr>
+                <th>Booking ID</th>
+                <th>Customer</th>
+                <th>Event</th>
+                <th>Tickets</th>
+                <th>Total (RM)</th>
+                <th>Status</th>
+                <th>Booking Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody id="adminBookingsList">
+        </tbody>
+
+    </table>
+
+</div>
+
+</section>
+
+
+      <p class="cozy-booking-bottom-note">
+    Every booking brings someone closer to a wonderful experience ✿
+</p>
+
+    </main>
+
+    <script src="admin-bookings.js"></script>
+
+</body>
+</html>

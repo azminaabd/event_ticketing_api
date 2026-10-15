@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register | Event Ticketing and Venue Booking System</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="cozy-auth-page">
+
+    <!-- TOP NAVIGATION -->
+    <header class="cozy-auth-header">
+        <a href="index.html" class="cozy-brand">
+            <span class="cozy-brand-icon">✿</span>
+            <span>Event Ticketing System</span>
+        </a>
+
+        <a href="index.html" class="cozy-home-link">
+            ← Explore Events
+        </a>
+    </header>
+
+    <!-- REGISTRATION PAGE -->
+    <main class="cozy-auth-main">
+
+        <!-- BACKGROUND DECORATIONS -->
+        <div class="cozy-decoration cozy-flower-left"
+             aria-hidden="true">✿</div>
+
+        <div class="cozy-decoration cozy-flower-right"
+             aria-hidden="true">✾</div>
+
+        <div class="cozy-decoration cozy-star-left"
+             aria-hidden="true">✧</div>
+
+        <div class="cozy-decoration cozy-star-right"
+             aria-hidden="true">✦</div>
+
+        <!-- PAGE INTRODUCTION -->
+        <section class="cozy-intro">
+            <span class="cozy-eyebrow">
+                ✿ A LITTLE ADVENTURE BEGINS ✿
+            </span>
+
+            <h1>Make memories with us.</h1>
+
+            <p>
+                Discover exciting events, reserve your tickets,
+                and make every moment special.
+            </p>
+        </section>
+
+        <!-- CENTERED REGISTRATION CARD -->
+        <section class="cozy-register-card">
+
+            <div class="cozy-card-decoration" aria-hidden="true">
+                ✦ &nbsp; ✿ &nbsp; ✦
+            </div>
+
+            <div class="cozy-card-heading">
+                <span class="cozy-card-label">
+                    YOUR EVENT JOURNEY
+                </span>
+
+                <h2>Create Your Account</h2>
+
+                <p>
+                    Join our community and start exploring
+                    wonderful events.
+                </p>
+            </div>
+
+            <form id="registerForm">
+
+                <!-- FULL NAME -->
+                <div class="cozy-form-group">
+                    <label for="registerName">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="registerName"
+                        name="name"
+                        placeholder="Enter your full name"
+                        maxlength="100"
+                        autocomplete="name"
+                        required
+                    >
+                </div>
+
+                <!-- EMAIL -->
+                <div class="cozy-form-group">
+                    <label for="registerEmail">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="registerEmail"
+                        name="email"
+                        placeholder="you@example.com"
+                        maxlength="150"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+
+                <!-- PASSWORD -->
+                <div class="cozy-form-group">
+                    <label for="registerPassword">
+                        Password
+                    </label>
+
+                    <div class="cozy-password-wrapper">
+                        <input
+                            type="password"
+                            id="registerPassword"
+                            name="password"
+                            placeholder="Minimum 8 characters"
+                            minlength="8"
+                            maxlength="72"
+                            autocomplete="new-password"
+                            aria-describedby="passwordHint"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="cozy-password-toggle"
+                            id="toggleRegisterPassword"
+                            aria-label="Show password"
+                            aria-pressed="false"
+                        >
+                            Show
+                        </button>
+                    </div>
+
+                    <p class="cozy-password-hint" id="passwordHint">
+                        ○ Password must contain 8–72 bytes.
+                    </p>
+                </div>
+
+                <!-- CONFIRM PASSWORD -->
+                <div class="cozy-form-group">
+                    <label for="confirmPassword">
+                        Confirm Password
+                    </label>
+
+                    <div class="cozy-password-wrapper">
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            placeholder="Re-enter your password"
+                            minlength="8"
+                            maxlength="72"
+                            autocomplete="new-password"
+                            aria-describedby="confirmPasswordHint"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="cozy-password-toggle"
+                            id="toggleConfirmPassword"
+                            aria-label="Show confirmation password"
+                            aria-pressed="false"
+                        >
+                            Show
+                        </button>
+                    </div>
+
+                    <p class="cozy-password-hint"
+                       id="confirmPasswordHint">
+                        ○ Passwords must match.
+                    </p>
+                </div>
+
+                <!-- REGISTER BUTTON -->
+                <button
+                    type="submit"
+                    class="cozy-register-btn"
+                    id="registerBtn"
+                >
+                    Create My Account ✿
+                </button>
+
+                <!-- API RESPONSE -->
+                <p
+                    id="registerMessage"
+                    class="auth-message"
+                    role="status"
+                    aria-live="polite"
+                ></p>
+
+            </form>
+
+            <!-- LOGIN LINK -->
+            <p class="cozy-login-link">
+                Already have an account?
+                <a href="login.html">Sign In →</a>
+            </p>
+
+            <div class="cozy-card-footer">
+                ✿ Discover • Book • Experience ✿
+            </div>
+
+        </section>
+
+        <!-- DECORATIVE TICKET -->
+        <div class="cozy-ticket-decoration" aria-hidden="true">
+            <span>✦ ADMIT ONE ✦</span>
+            <strong>Good Times Ahead!</strong>
+            <small>YOUR NEXT EVENT AWAITS</small>
+        </div>
+
+    </main>
+
+    <script src="register.js"></script>
+</body>
+</html>

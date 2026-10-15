@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Manage Bookings | Event Ticketing System</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="cozy-booking-body">
+
+    <header class="auth-header cozy-booking-header">
+
+        <a href="organizer-dashboard.html" class="auth-logo">
+            🎟️ Event Ticketing System
+        </a>
+
+        <a href="organizer-dashboard.html" class="cozy-booking-home">
+            ← Dashboard
+        </a>
+
+    </header>
+
+    <main class="organizer-main">
+
+        <section class="organizer-welcome">
+
+            <span class="cozy-booking-eyebrow">
+                ✿ BOOKING MANAGEMENT ✿
+            </span>
+
+            <h1>Manage Bookings</h1>
+
+            <p>
+                Review reservations for your events,
+                all in one lovely place.
+            </p>
+
+        </section>
+
+        <section class="organizer-bookings-section">
+
+            <div class="organizer-bookings-toolbar">
+
+                <h2>Customer Reservations</h2>
+
+                <select id="organizerBookingFilter"
+                        aria-label="Filter bookings by status">
+
+                    <option value="ALL">All Bookings</option>
+                    <option value="PENDING">Pending</option>
+                    <option value="CONFIRMED">Confirmed</option>
+                    <option value="CANCELLED">Cancelled</option>
+
+                </select>
+
+            </div>
+
+            <p id="organizerBookingsMessage"
+               role="status"
+               aria-live="polite">
+                Loading bookings...
+            </p>
+
+            <div id="organizerBookingsList"
+                 class="organizer-bookings-list">
+            </div>
+
+        </section>
+
+        <p class="cozy-booking-bottom-note">
+            Thoughtful planning makes wonderful memories ✿
+        </p>
+
+    </main>
+
+    <script src="organizer-bookings.js"></script>
+
+</body>
+</html>
