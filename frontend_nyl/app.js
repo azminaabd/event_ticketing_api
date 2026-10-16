@@ -1,5 +1,5 @@
 'use strict';
-const API_ROOT = new URL('../../', document.currentScript.src);
+const API_ROOT = new URL('../', document.currentScript.src);
 const $ = id => document.getElementById(id);
 const esc = x => String(x ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const money = x => Number(x)===0 ? 'Free' : new Intl.NumberFormat('en-MY',{style:'currency',currency:'MYR'}).format(Number(x)||0);
@@ -12,7 +12,7 @@ function bookingKey(){return 'luma_bookings_'+Number(state.user?.user_id)}
 function bookingIds(){try{return JSON.parse(localStorage.getItem(bookingKey())||'[]').filter(n=>Number.isInteger(n)&&n>0)}catch{return []}}
 function rememberBooking(id){try{localStorage.setItem(bookingKey(),JSON.stringify([...new Set([id,...bookingIds()])].slice(0,100)))}catch{toast('Booking created. Save your reference #'+id+'; browser storage is unavailable.')}}
 async function api(path,{method='GET',body,publicRequest=false,...rest}={}){
-  if(!/^https?:$/.test(API_ROOT.protocol))throw Error('Open Luma through http://localhost/event_ticketing_api-main/frontend/Nayli/ with Apache running.');
+  if(!/^https?:$/.test(API_ROOT.protocol))throw Error('Open Luma through http://localhost/event_ticketing_api-main/frontend_nyl/ with Apache running.');
   const headers={Accept:'application/json',...(body?{'Content-Type':'application/json'}:{}),...(!publicRequest&&state.token?{Authorization:'Bearer '+state.token}:{})};
   let response;try{response=await fetch(new URL(path,API_ROOT),{method,headers,body:body?JSON.stringify(body):undefined,cache:'no-store',signal:AbortSignal.timeout(15000),...rest})}catch{throw Error('Unable to reach the server. Check that Apache is running, then try again.')}
   let data;try{data=await response.json()}catch{throw Error(`Unexpected server response (${response.status}). Check the project URL and PHP setup.`)}

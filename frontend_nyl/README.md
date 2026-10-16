@@ -4,9 +4,9 @@ Individual frontend by Sarah Nayli Binti Mohammad Kamal (AM2412018230).
 
 ## Run with the shared backend
 
-Place this folder at frontend/Nayli inside the shared PHP project. Start Apache and MySQL in XAMPP, import the shared database, and open:
+Place this folder at frontend_nyl inside the shared PHP project. Start Apache and MySQL in XAMPP, import the shared database, and open:
 
-http://localhost/event_ticketing_api-main/frontend/Nayli/
+http://localhost/event_ticketing_api-main/frontend_nyl/
 
 If the project folder has a different name or is nested, use that actual localhost path. API URLs are resolved from app.js relative to the shared project root. Open through Apache rather than double-clicking index.html.
 
